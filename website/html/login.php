@@ -12,6 +12,9 @@
     die();
   }
 
+  // eventuale messaggio di errore
+  $error_msg = NULL;
+
   // se la richiesta è di tipo post, e quindi, si suppone conseguente all'invio del form per effettuare l'accesso,
   // viene effettuato un tentativo di autenticazione
   if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -48,7 +51,7 @@
       
       // accesso fallito
       if($query_result->row_count() == 0)
-        $GLOBALS["error_msg"] = "Credenziali errate.";
+        $error_msg = "Credenziali errate.";
       // accesso avvenuto con successo, autenticazione utente e redirect
       else {
         $authenticator->authenticate($query_result->row(), $user_type);
@@ -57,7 +60,7 @@
       }
     }
     else 
-      $GLOBALS["error_msg"] = "Parametri nella richiesta mancanti o non corretti.";
+      $error_msg = "Parametri nella richiesta mancanti o non corretti.";
 
   }
 ?>
@@ -126,9 +129,9 @@
             </div>
 
             <!-- error message -->
-            <?php if(isset($GLOBALS["error_msg"])) { ?>
+            <?php if($error_msg != NULL) { ?>
               <p class="help is-danger">
-                <?php echo $GLOBALS["error_msg"]; ?>
+                <?php echo $error_msg; ?>
               </p>
             <?php } ?>
 
