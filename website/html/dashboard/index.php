@@ -14,7 +14,7 @@
   $url = NULL;
   switch($authenticator->get_authenticated_user_type()) {
     case UserType::Docente:
-      $url = "/dashboard/docenti.php";
+      $url = "/dashboard/docenti/index.php";
       break;
     case UserType::Studente:
       $url = "/dashboard/studenti.php"; 
