@@ -32,47 +32,43 @@
       <div class="columns is-centered">
         <div class="column is-10-desktop">
 
-          <div class="columns is-multiline">
-            <div class="column">
+          <div class="columns mx-2 is-multiline">
 
-              <!-- titolo pagina e sottotitolo -->
+            <!-- titolo pagina e sottotitolo -->
+            <div class="column is-12">
+              <h1 class="title is-1">I tuoi insegnamenti</h1>
+              <h2 class="subtitle">Gestisci i calendari d'esame dei tuoi insegnamenti</h2>
+            </div>
+
+            <!-- card insegnamenti -->
+            <?php
+              $database = new Database();
+              $query_string = "select * from progetto_esame.insegnamenti where docente = $1";
+              $query_params = array($authenticator->get_authenticated_user()["email"]);
+              $result = $database->execute_single_query($query_string, $query_params);
+              $rows = $result->all_rows();
+              for($i = 0; $i < sizeof($rows); $i++) {
+            ?>
               <div class="column is-12">
-                <h1 class="title is-1">I tuoi insegnamenti</h1>
-                <h2 class="subtitle">Gestisci i calendari d'esame dei tuoi insegnamenti</h2>
-              </div>
-            
-            </div>
-            <div class="column is-12 is-multiline">
-
-              <!-- card insegnamenti -->
-              <?php
-                $database = new Database();
-                $query_string = "select * from progetto_esame.insegnamenti where docente = $1";
-                $query_params = array($authenticator->get_authenticated_user()["email"]);
-                $result = $database->execute_single_query($query_string, $query_params);
-                $rows = $result->all_rows();
-                for($i = 0; $i < sizeof($rows); $i++) {
-              ?>
-                  <div class="card mb-5 mx-2">
-                    <header class="card-header">
-                      <p class="card-header-title">
-                        <?php echo $rows[$i]["nome"] ?>
-                      </p>
-                    </header>
-                    <div class="card-content">
-                      <div class="content">
-                        <?php echo $rows[$i]["descrizione"] ?>
-                      </div>
+                <div class="card mb-5">
+                  <header class="card-header">
+                    <p class="card-header-title">
+                      <?php echo $rows[$i]["nome"] ?>
+                    </p>
+                  </header>
+                  <div class="card-content">
+                    <div class="content">
+                      <?php echo $rows[$i]["descrizione"] ?>
                     </div>
-                    <footer class="card-footer">
-                      <a href="/dashboard/docenti/appelli.php?insegnamento=<?php echo $rows[$i]["codice"] ?>&cdl=<?php echo $rows[$i]["corso_laurea"] ?>" class="card-footer-item">Visualizza appelli</a>
-                    </footer>
                   </div>
-              <?php
-                }
-              ?>
-
-            </div>
+                  <footer class="card-footer">
+                    <a href="/dashboard/docenti/appelli.php?insegnamento=<?php echo $rows[$i]["codice"] ?>&cdl=<?php echo $rows[$i]["corso_laurea"] ?>" class="card-footer-item">Visualizza appelli</a>
+                  </footer>
+                </div>
+              </div>
+            <?php
+              }
+            ?>
           </div>
 
         </div>
