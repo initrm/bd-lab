@@ -101,6 +101,20 @@
       return pg_fetch_row($this->results, NULL, PGSQL_ASSOC);
     }
 
+    /**
+     * restituisce tutte le righe ritornate dalal query sotto forma di array di array associativi
+     */
+    function all_rows() {
+      return pg_fetch_all($this->results, PGSQL_ASSOC);
+    }
+
+    /**
+     * restituisce il numero di righe ritornate dalla query
+     */
+    function affected_rows() {
+      return pg_affected_rows($this->results);
+    }
+
   }
   
 ?>
