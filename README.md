@@ -5,7 +5,7 @@ A simple (i.e. imperfect) application that simulates a complete University onlin
 
 ## Project Structure
 
-```bash
+```
 .
 |
 +--> website: contains all the file that power up the website
