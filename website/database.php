@@ -40,6 +40,7 @@
      * se era già stata aperta una connessione tramite il metodo open_conn() viene utilizzata quella connessione,
      * si noti che al termine dell'esecuzione della funzione la connessione verrà terminata e quindi bisognerà
      * aprirne un'altra (tramite l'invocazione di open_conn()) prima di chiamare altri metodi
+     * solleva un'eccezione di tipo QueryError se la query fallisce
      */
     function execute_single_query(string $query, array $query_params) {
       // se non è ancora stata aperta la connessione viene aperta
@@ -47,19 +48,18 @@
         $this->open_conn();
       
       // esegue la query fornita come argomento
-      $tag = "single_query";
-      pg_prepare($this->connection, $tag, $query);
-      $result = pg_execute($this->connection, $tag, $query_params);
+      $result = $this->execute_query("single_query", $query, $query_params);
 
       // chiusura della connessione
       pg_close($this->connection);
 
-      return new QueryResult($result);
+      return $result;
     }
 
     /**
      * esegue la query fornita come argomento, identificata dal tag fornito, con i parametri forniti
      * solleva un'eccezione se non è ancora stata aperta una connessione al database
+     * solleva un'eccezione di tipo QueryError se la query fallisce
      */
     function execute_query(string $tag, string $query, array $query_params) {
       // se non è ancora stata aperta la connessione viene solleva un'eccezione
@@ -70,9 +70,22 @@
       pg_prepare($this->connection, $tag, $query);
       $result = pg_execute($this->connection, $tag, $query_params);
 
+      if($result == false)
+        throw new QueryError(pg_last_error($this->connection));
+
       return new QueryResult($result);
     }
     
+  }
+
+  /**
+   * eccezione custom che viene sollevata dalla classe Database nel momento in cui un query fallisce
+   * e che riporta al suo interno il messaggio relativo a tale fallimento
+   */
+  class QueryError extends Exception {
+    public function __construct($message, $code = 0, Throwable $previous = null) {
+      parent::__construct(trim(explode("CONTEXT:", $message)[0]) . ".", $code, $previous);
+    }
   }
 
   class QueryResult {
