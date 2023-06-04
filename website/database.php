@@ -6,13 +6,14 @@
     private $connection = NULL;
 
     /**
-     * apre una nuova connessione verso il database
+     * apre una nuova connessione verso il database e setta il search path automaticamento sullo schema del progetto
      * solleva un'eccezione se la connessione è già aperta
      */
     function open_conn() {
       if($this->connection != NULL)
         throw new Exception("Connessione non aperta.");
       $this->connection = pg_connect("host=pgsql user=progetto password=progetto dbname=progetto_esame");
+      $this->execute_query("set_search_path", "set search_path to progetto_esame", array());
     }
 
     /**
