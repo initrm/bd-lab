@@ -42,7 +42,7 @@
       }
       $query_string = 
         " select email, " . $query_vars["cols"] .
-        " from progetto_esame." . $query_vars["table"] . 
+        " from " . $query_vars["table"] . 
         " where email = $1 and password = $2";
       $query_params = array($_POST["email"], $_POST["password"]);
 

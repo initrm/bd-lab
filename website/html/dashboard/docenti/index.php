@@ -43,7 +43,7 @@
             <!-- card insegnamenti -->
             <?php
               $database = new Database();
-              $query_string = "select * from progetto_esame.insegnamenti where docente = $1";
+              $query_string = "select * from insegnamenti where docente = $1";
               $query_params = array($authenticator->get_authenticated_user()["email"]);
               $result = $database->execute_single_query($query_string, $query_params);
               $rows = $result->all_rows();

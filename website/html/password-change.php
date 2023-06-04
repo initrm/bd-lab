@@ -43,7 +43,7 @@
           }
 
           // verifica della correttezza della vecchia password
-          $query_string = "select email from progetto_esame." . $table . " where email = $1 and password = $2";
+          $query_string = "select email from " . $table . " where email = $1 and password = $2";
           $query_params = array($authenticator->get_authenticated_user()["email"], $_POST["vecchia_password"]);
           $results = $database->execute_query("old_psw_check", $query_string, $query_params);
           if($results->row_count() == 0)
@@ -51,7 +51,7 @@
           else {
 
             // cambio della password
-            $query_string = "update progetto_esame." . $table . " set password = $1 WHERE email = $2 and password = $3;";
+            $query_string = "update " . $table . " set password = $1 WHERE email = $2 and password = $3;";
             $query_params = array($_POST["nuova_password"], $authenticator->get_authenticated_user()["email"], $_POST["vecchia_password"]);
             $results = $database->execute_query("password_update", $query_string, $query_params);
             if($results->affected_rows() == 0)
