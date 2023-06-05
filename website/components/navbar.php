@@ -11,7 +11,7 @@
     <!-- elementi navbar -->
     <div class="navbar-menu" id="navbar">
       <div class="navbar-start">
-        <p class="navbar-item">Loggato come: <span class="has-text-link"><?php echo $display_name; ?></span></p>
+        <p class="navbar-item">Loggato come:&nbsp;<span class="has-text-link"><?php echo $display_name; ?></span></p>
       </div>
       <div class="navbar-end">
         <div class="navbar-item">
