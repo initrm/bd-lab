@@ -13,9 +13,9 @@ function showToast(message, bgColor) {
 }
 
 function showDangerToast(message) {
-  showToast(message, "linear-gradient(to right, #c70000, #ebc147)");
+  showToast(message, "#c70000");
 }
 
 function showSuccessToast(message) {
-  showToast(message, "linear-gradient(to right, #00b09b, #96c93d)");
+  showToast(message, "#00b09b");
 }
