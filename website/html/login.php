@@ -29,7 +29,7 @@
       switch($_POST["tipo_utente"]) {
         case "studente":
           $user_type = UserType::Studente;
-          $query_vars = array("table" => "studenti", "cols" => "matricola, nome, cognome");
+          $query_vars = array("table" => "studenti", "cols" => "matricola, nome, cognome, corso_laurea");
           break;
         case "docente":
           $user_type = UserType::Docente;
