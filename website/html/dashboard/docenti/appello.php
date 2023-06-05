@@ -144,7 +144,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script type="text/javascript" src="/scripts/toast.js"></script>
     <!-- funzione salva valutazione -->
-    <script>
+    <script type="text/javascript">
       function salvaValutazione(appello, studente) {
         var element = document.getElementById("valutazione-s-" + studente + "-a-" + appello);
         axios.postForm("/api/docenti/save-result.php", { appello, studente, valutazione: element.value })
