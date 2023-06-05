@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+
+  pgsql:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: unimipgsql
+    volumes:
+      - ./data:/var/lib/postgresql/data
+
+  httpd:
+    image: pg-php8.2.6-apache
+    build:
+      dockerfile: pg-php8.2.6-apache.Dockerfile
+    restart: always
+    ports: 
+      - 8082:80
+    volumes:
+      - ./../website:/var/www
