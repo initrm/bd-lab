@@ -138,7 +138,7 @@
                     <div class="field">
                       <label class="label">Descrizione</label>
                       <div class="control">
-                        <textarea minlength="12" name="descrizione" class="textarea" placeholder="Il corso si occupa di..."></textarea>
+                        <textarea minlength="12" name="descrizione" class="textarea" placeholder="es. L'insegnamento si pone come obiettivo quello di..."></textarea>
                       </div>
                     </div>
                   </div>
