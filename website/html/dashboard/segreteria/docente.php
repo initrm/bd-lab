@@ -190,7 +190,8 @@
                     <div class="content"><?php echo $insegnamento["descrizione"]; ?></div>
                   </div>
                   <footer class="card-footer">
-                    <a target="_blank" href="/dashboard/segreteria/corso-laurea.php?id=<?php echo $insegnamento["corso_laurea"]; ?>" class="card-footer-item">Vai a corso di laurea</a>
+                    <a href="/dashboard/segreteria/corso-laurea.php?codice=<?php echo $insegnamento["corso_laurea"]; ?>" class="card-footer-item">Vai al corso di laurea</a>
+                    <a href="/dashboard/segreteria/insegnamento.php?cdl=<?php echo $insegnamento["corso_laurea"]; ?>&codice=<?php echo $insegnamento["codice"]; ?>" class="card-footer-item">Vai all'insegnamento</a>
                   </footer>
                 </div>
               </div>
