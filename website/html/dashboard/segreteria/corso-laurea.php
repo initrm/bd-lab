@@ -118,7 +118,7 @@
                     <div class="field">
                       <label class="label">Codice</label>
                       <div class="control">
-                        <input placeholder="es. ABC" minlength="2" name="codice" class="input" type="text" required="true" />
+                        <input placeholder="es. ABC" minlength="1" name="codice" class="input" type="text" required="true" />
                       </div>
                     </div>
                   </div>
