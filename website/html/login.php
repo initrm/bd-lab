@@ -37,11 +37,11 @@
           break;
         case "segreteria":
           $user_type = UserType::Segreteria;
-          $query_vars = array("table" => "segreteria", "cols" => "");
+          $query_vars = array("table" => "segreteria", "cols" => NULL);
           break;
       }
       $query_string = 
-        " select email, " . $query_vars["cols"] .
+        " select email " . ($query_vars["cols"] != NULL ? ", " . $query_vars["cols"] : "") .
         " from " . $query_vars["table"] . 
         " where email = $1 and password = $2";
       $query_params = array($_POST["email"], $_POST["password"]);
