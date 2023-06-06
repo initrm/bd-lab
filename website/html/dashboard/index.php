@@ -20,7 +20,7 @@
       $url = "/dashboard/studenti/index.php"; 
       break;
     case UserType::Segreteria:
-      $url = "/dashboard/segreteria.php";
+      $url = "/dashboard/segreteria/index.php";
       break;
   }
 
