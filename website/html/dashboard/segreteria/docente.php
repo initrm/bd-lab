@@ -98,7 +98,7 @@
                 <ul>
                   <li><a href="/dashboard/segreteria/index.php">Home</a></li>
                   <li><a href="/dashboard/segreteria/docenti.php">Gestione docenti</a></li>
-                  <li class="is-active"><a href="#" aria-current="page">Gestione docente "<?php echo $docente["nome"] . " " . $docente["cognome"] ?>"</a></li>
+                  <li class="is-active"><a href="#" aria-current="page">Gestione docente "<?php echo $docente["nome"] . " " . $docente["cognome"]; ?>"</a></li>
                 </ul>
               </nav>
             </div>
