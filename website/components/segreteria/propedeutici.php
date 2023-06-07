@@ -36,7 +36,7 @@
                   <td><?php echo $p["codice"]; ?></td>
                   <td><?php echo $p["nome"]; ?></td>
                   <td><?php echo $p["anno"]; ?></td>
-                  <td>
+                  <td class="is-flex is-justify-content-space-evenly">
                     <a href="/dashboard/segreteria/insegnamento.php?codice=<?php echo $p["codice"]; ?>&cdl=<?php echo $p["corso_laurea"]; ?>" class="button is-small is-link is-outlined">
                       <ion-icon name="arrow-forward-outline"></ion-icon>
                     </a>
