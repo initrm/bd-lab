@@ -6,6 +6,7 @@
   include_once('./../../../components/head.php');
   include_once('./../../../database.php');
   include_once('./../../../components/navbar.php');
+  include_once('./../../../components/title.php');
 
   $authenticator = new Authenticator();
 
@@ -44,8 +45,6 @@
     else
       $error_msg = "Parametri richiesta mancanti.";
   }
-
-  
 
   // ottenimento appelli a cui l'utente è attualmente iscritto che sono da svolgere nel futuro
   $query_string = "select * from get_iscrizioni_attive_appelli_studente($1)";
@@ -115,11 +114,14 @@
 <html>
   <?php head("Dashboard Studenti"); ?>
   <body>
+
+    <!-- navbar -->
     <?php 
       $user = $authenticator->get_authenticated_user();
-      $display_name = $user["nome"] . " " . $user["cognome"];
-      navbar($display_name);
+      navbar($user["nome"] . " " . $user["cognome"]);
     ?>
+
+    <!-- content -->
     <div class="container">
       <div class="columns is-centered">
         <div class="column is-10-desktop">
@@ -222,9 +224,11 @@
         </div>
       </div>
     </div>
+
+    <!-- scripts -->
+
     <!-- toast -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script type="text/javascript" src="/scripts/toast.js"></script>
+    <?php include_once("./../../../components/toasts.php"); ?>
     <!-- mostra toast con esito richiesta iscrizione -->
     <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', () => {
@@ -251,5 +255,6 @@
         }
       }
     </script>
+
   </body>
 </html>
