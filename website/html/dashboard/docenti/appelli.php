@@ -6,6 +6,7 @@
   include_once('./../../../components/head.php');
   include_once('./../../../database.php');
   include_once('./../../../components/navbar.php');
+  include_once('./../../../components/title.php');
 
   $authenticator = new Authenticator();
 
@@ -30,7 +31,7 @@
   
   // ottenimento informazioni insegnamento e verifica correttezza parametri
   // ok quando esiste l'insegnamento ed è di proprietà dell'utente loggato
-  $query_string = "select * from progetto_esame.insegnamenti where codice = $1 and corso_laurea = $2 and docente = $3";
+  $query_string = "select * from insegnamenti where codice = $1 and corso_laurea = $2 and docente = $3";
   $query_params = array($_GET["insegnamento"], $_GET["cdl"], $authenticator->get_authenticated_user()["email"]);
   $result = $database->execute_query("get_insegnamento", $query_string, $query_params);
   // se l'insegnamento non esiste, ovvero i parametri get sono errati, l'utente viene reindirizzato alla index della dashobard
@@ -46,7 +47,7 @@
     // verifica presenza data e che sia una data nel futuro
     if(isset($_POST["data"]) && date("Y-m-d") < $_POST["data"]) {
       // tentativo di creazione dell'appello
-      $query_string = "insert into progetto_esame.appelli(insegnamento, corso_laurea, data) values ($1, $2, $3)";
+      $query_string = "insert into appelli(insegnamento, corso_laurea, data) values ($1, $2, $3)";
       $query_params = array($insegnamento["codice"], $insegnamento["corso_laurea"], $_POST["data"]);
       try {
         $database->execute_query("insert_appello", $query_string, $query_params);
@@ -60,7 +61,7 @@
   }
 
   // ottenimento appelli attualmente fissati per l'insegnamento
-  $query_string = "select * from progetto_esame.appelli where insegnamento = $1 and corso_laurea = $2 order by data desc";
+  $query_string = "select * from appelli where insegnamento = $1 and corso_laurea = $2 order by data desc";
   $query_params = array($insegnamento["codice"], $insegnamento["corso_laurea"]);
   $result = $database->execute_query("get_appelli", $query_string, $query_params);
   $appelli = $result->all_rows();
@@ -73,11 +74,14 @@
 <html>
   <?php head("Gestione Appelli"); ?>
   <body>
+
+    <!-- navbar -->
     <?php 
       $user = $authenticator->get_authenticated_user();
-      $display_name = $user["nome"] . " " . $user["cognome"];
-      navbar($display_name);
+      navbar($user["nome"] . " " . $user["cognome"]);
     ?>
+
+    <!-- content -->
     <div class="container">
       <div class="columns is-centered">
         <div class="column is-10-desktop">
@@ -159,7 +163,21 @@
         </div>
       </div>
     </div>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <!-- scripts -->
+    
+    <!-- icons -->
+    <?php include_once("./../../../components/icons.php"); ?>
+    <!-- toast -->
+    <?php include_once("./../../../components/toasts.php"); ?>
+    <!-- mostra toast con esito richiesta iscrizione -->
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', () => {
+        <?php if($_SERVER["REQUEST_METHOD"] == "POST" && $error_msg == NULL) { ?>
+          showSuccessToast("Appello creato con successo.");
+        <?php } ?>
+      });
+    </script>
+    
   </body>
 </html>
