@@ -1,6 +1,9 @@
 <?php 
   /**
+   * restituisce un componente HTML corrispondente ad una tabella contenente gli esami
    * 
+   * $records deve contenere delle righe della tabella insegnamenti in join con la tabella appelli, docente ed esami
+   * $con_valutazioni se true la tabella reinderizzerà una colonna con i voti, in caso contrario no
    */
   function exam_table($records, $con_valutazioni = true) { 
 ?>
