@@ -90,7 +90,14 @@
               </nav>
             </div>
 
-            <!-- card appelli -->
+            <!-- scritta nel caso in cui non ci siano appelli -->
+            <?php if(sizeof($studenti) == 0) { ?>
+              <div class="column is-12">
+                <p class="is-italic">Non ci sono iscritti all'appello.</p>
+              </div>
+            <?php } ?>
+
+            <!-- card iscritti -->
             <?php for($i = 0; $i < sizeof($studenti); $i++) { ?>
               <div class="column is-12">
                 <div class="box">
