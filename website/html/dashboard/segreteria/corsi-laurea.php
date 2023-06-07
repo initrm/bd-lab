@@ -6,6 +6,7 @@
   include_once('./../../../components/head.php');
   include_once('./../../../database.php');
   include_once('./../../../components/navbar.php');
+  include_once('./../../../components/title.php');
 
   $authenticator = new Authenticator();
 
@@ -59,11 +60,11 @@
 <html>
   <?php head("Gestione Corsi di Laurea"); ?>
   <body>
-    <?php 
-      $user = $authenticator->get_authenticated_user();
-      $display_name = $user["email"];
-      navbar($display_name);
-    ?>
+
+    <!-- navbar -->
+    <?php navbar($authenticator->get_authenticated_user()["email"]); ?>
+
+    <!-- content -->
     <div class="container">
       <div class="columns is-centered">
         <div class="column is-10-desktop">
@@ -79,10 +80,8 @@
               </nav>
             </div>
 
-            <!-- titolo sezione e sottotitolo -->
-            <div class="column is-12">
-              <h1 class="title is-1">Crea corso di laurea</h1>
-            </div>
+            <!-- titolo sezione -->
+            <?php section_title("Crea corso di laurea", NULL); ?>
 
             <!-- form creazione nuovo corso di laurea -->
             <div class="column is-12">
@@ -146,10 +145,8 @@
               </form>
             </div>
 
-            <!-- titolo sezione e sottotitolo -->
-            <div class="column is-12">
-              <h1 class="title is-1">Lista corsi di laurea</h1>
-            </div>
+            <!-- titolo sezione -->
+            <?php section_title("Lista corsi di laurea", NULL); ?>
             
             <!-- card docenti -->
             <?php foreach($corsi_laurea as $corso) { ?>
@@ -178,12 +175,13 @@
         </div>
       </div>
     </div>
+
+    <!-- scripts -->
+
     <!-- icone -->
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <?php include_once('./../../../components/toasts.php'); ?>
     <!-- toast -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script type="text/javascript" src="/scripts/toast.js"></script>
+    <?php include_once('./../../../components/icons.php'); ?>
     <!-- mostra toast con esito richiesta iscrizione -->
     <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', () => {
@@ -192,5 +190,6 @@
         <?php } ?>
       });
     </script>
+
   </body>
 </html>
