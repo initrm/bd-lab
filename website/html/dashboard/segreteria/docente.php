@@ -105,7 +105,7 @@
             </div>
 
             <!-- titolo sezione -->
-            <?php section_title("Informazioni docente", NULL); ?>
+            <?php section_title("Informazioni docente"); ?>
 
             <!-- form modifica docente -->
             <div class="column is-12">
@@ -174,7 +174,7 @@
             </div>
 
             <!-- titolo sezione -->
-            <?php section_title("Insegnamenti del docente", NULL); ?>
+            <?php section_title("Insegnamenti del docente"); ?>
             
             <!-- card docenti -->
             <?php foreach($insegnamenti as $insegnamento) { ?>

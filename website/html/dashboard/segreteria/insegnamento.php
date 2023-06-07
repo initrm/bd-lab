@@ -100,7 +100,7 @@
             </div>
 
             <!-- titolo sezione -->
-            <?php section_title("Informazioni insegnamento", NULL); ?>
+            <?php section_title("Informazioni insegnamento"); ?>
 
             <!-- form modifica insegnamento -->
             <div class="column is-12">

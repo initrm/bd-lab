@@ -1,4 +1,4 @@
-<?php function section_title(?string $title, ?string $subtitle) { ?>
+<?php function section_title(?string $title, ?string $subtitle = NULL) { ?>
   <div class="column is-12">
     <?php if($title != NULL) { ?>
       <h1 class="title is-1"><?php echo $title; ?></h1>

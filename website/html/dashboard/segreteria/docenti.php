@@ -81,7 +81,7 @@
             </div>
 
             <!-- titolo sezione e sottotitolo -->
-            <?php section_title("Crea docente", NULL); ?>
+            <?php section_title("Crea docente"); ?>
 
             <!-- form creazione nuovo docente -->
             <div class="column is-12">
@@ -150,7 +150,7 @@
             </div>
 
             <!-- titolo sezione -->
-            <?php section_title("Lista docenti", NULL); ?>
+            <?php section_title("Lista docenti"); ?>
             
             <!-- card docenti -->
             <?php foreach($docenti as $docente) { ?>

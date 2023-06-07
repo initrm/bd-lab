@@ -81,7 +81,7 @@
             </div>
 
             <!-- titolo sezione -->
-            <?php section_title("Crea corso di laurea", NULL); ?>
+            <?php section_title("Crea corso di laurea"); ?>
 
             <!-- form creazione nuovo corso di laurea -->
             <div class="column is-12">
@@ -146,7 +146,7 @@
             </div>
 
             <!-- titolo sezione -->
-            <?php section_title("Lista corsi di laurea", NULL); ?>
+            <?php section_title("Lista corsi di laurea"); ?>
             
             <!-- card docenti -->
             <?php foreach($corsi_laurea as $corso) { ?>

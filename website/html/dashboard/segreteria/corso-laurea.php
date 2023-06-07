@@ -97,7 +97,7 @@
             </div>
 
             <!-- titolo sezione -->
-            <?php section_title("Aggiungi insegnamento al corso di laurea", NULL); ?>
+            <?php section_title("Aggiungi insegnamento al corso di laurea"); ?>
 
             <!-- form modifica docente -->
             <div class="column is-12">
@@ -181,7 +181,7 @@
             </div>
 
             <!-- titolo sezione -->
-            <?php section_title("Insegnamenti del corso di laurea", NULL); ?>
+            <?php section_title("Insegnamenti del corso di laurea"); ?>
             
             <!-- card docenti -->
             <?php foreach($insegnamenti as $insegnamento) { ?>
