@@ -7,6 +7,7 @@
   include_once('./../../../database.php');
   include_once('./../../../components/navbar.php');
   include_once('./../../../components/title.php');
+  include_once('./../../../components/studenti/exam-table.php');
 
   $authenticator = new Authenticator();
 
@@ -74,42 +75,7 @@
   // chiusura connessione
   $database->close_conn();
 
-  function genera_tabella_esami($records, $con_valutazioni = true) { ?>
-    <div class="table-container">
-      <table class="table is-striped is-bordered is-fullwidth">
-        <thead>
-          <tr>
-            <th><abbr title="Codice Univoco Appello">CUA</abbr></th>
-            <th>Data</th>
-            <th><abbr title="Corso di Laurea">CDL</abbr></th>
-            <th><abbr title="Codice Insegnamento">CI</abbr></th>
-            <th>Insegnamento</th>
-            <th><abbr title="Anno Previsto Insegnamento">API</abbr></th>
-            <th>Docente</th>
-            <?php if($con_valutazioni) { ?><th>Valutazione</th><?php } ?>
-          </tr>
-        </thead>
-        <tbody>
-          <?php foreach($records as $esame) { ?>
-            <tr>
-              <td><?php echo $esame["appello"]; ?></td>
-              <td><?php echo date_format(date_create($esame["data_appello"]), "d/m/Y"); ?></td>
-              <td><?php echo $esame["cdl"]; ?></td>
-              <td><?php echo $esame["codice_insegnamento"]; ?></td>
-              <td><?php echo $esame["nome_insegnamento"]; ?></td>
-              <td><?php echo $esame["anno_insegnamento"]; ?></td>
-              <td><?php echo $esame["nome_docente"] . " " . $esame["cognome_docente"]; ?></td>
-              <?php if($con_valutazioni) { ?>
-                <td <?php if($esame["valutazione"] != NULL) { ?> class="has-background-<?php echo $esame["valutazione"] >= 18 ? "success" : "danger"; ?>-light" <?php } ?>>
-                  <?php echo $esame["valutazione"]; ?>
-                </td>
-              <?php } ?>
-            </tr>
-          <?php } ?>
-        </tbody>
-      </table>
-    </div>
-<?php } ?>
+?>
 <!DOCTYPE html>
 <html>
   <?php head("Dashboard Studenti"); ?>
@@ -137,17 +103,7 @@
             <div class="column is-12">
               <div class="box">
                 <p class="mb-1"><strong>Iscrizioni attive agli appelli d'esame</strong></p>
-                <?php 
-                  if(sizeof($iscrizioni) != 0) {
-                    genera_tabella_esami($iscrizioni, false);
-                  }
-                  else {
-                ?>
-                    <p>Nessuna iscrizione attiva.</p>
-                <?php
-                  }
-                ?>
-                
+                <?php if(sizeof($iscrizioni) != 0) { exam_table($iscrizioni, false); } else { ?><p class="is-italic">Nessuna iscrizione attiva.</p><?php } ?>
               </div>
             </div>
 
@@ -159,32 +115,30 @@
                     <div class="field">
                       <label class="label">Iscriviti ad un appello d'esame</label>
                       <?php if(sizeof($appelli) > 0) { ?>
-                      <div class="control">
-                        <div class="select is-fullwidth">
-                          <select name="appello">
-                            <?php foreach($appelli as $appello) { ?>
-                              <option value="<?php echo $appello["appello"] ?>">
-                                <?php echo $appello["nome_insegnamento"] . " del " . date_format(date_create($appello["data_appello"]), "d/m/Y"); ?>
-                              </option>
-                            <? } ?>
-                          </select>
+                        <div class="control">
+                          <div class="select is-fullwidth">
+                            <select name="appello">
+                              <?php foreach($appelli as $appello) { ?>
+                                <option value="<?php echo $appello["appello"] ?>">
+                                  <?php echo $appello["nome_insegnamento"] . " del " . date_format(date_create($appello["data_appello"]), "d/m/Y"); ?>
+                                </option>
+                              <? } ?>
+                            </select>
+                          </div>
                         </div>
-                      </div>
-                      <?php } else { ?>
-                        <p>Nessun appello disponibile.</p>
-                      <?php } ?>
+                      <?php } else { ?><p class="is-italic">Nessun appello disponibile.</p><?php } ?>
                     </div>
                   </div>
                   <?php if(sizeof($appelli) > 0) { ?>
-                  <div class="column is-3 is-flex is-align-items-end">
-                    <div class="field" style="flex: 1 1 auto;">
-                      <div class="control">
-                        <button class="button is-link is-outlined is-fullwidth">
-                          Conferma iscrizione
-                        </button>
+                    <div class="column is-3 is-flex is-align-items-end">
+                      <div class="field" style="flex: 1 1 auto;">
+                        <div class="control">
+                          <button class="button is-link is-outlined is-fullwidth">
+                            Conferma iscrizione
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
                   <?php } ?>
                 </div>
               </form>
@@ -209,14 +163,14 @@
             <!-- carriera completa -->
             <div id="carriera-completa" class="column is-12">
               <div class="box">
-                <?php genera_tabella_esami($carriera_completa); ?>
+                <?php exam_table($carriera_completa); ?>
               </div>
             </div>
 
             <!-- carriera valida -->
             <div id="carriera-valida" class="column is-12 is-hidden">
               <div class="box">
-                <?php genera_tabella_esami($carriera_valida); ?>
+                <?php exam_table($carriera_valida); ?>
               </div>
             </div>
 
