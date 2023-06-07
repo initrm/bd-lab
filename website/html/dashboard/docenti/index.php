@@ -4,6 +4,7 @@
   include_once('./../../../components/head.php');
   include_once('./../../../database.php');
   include_once('./../../../components/navbar.php');
+  include_once('./../../../components/title.php');
 
   $authenticator = new Authenticator();
 
@@ -23,22 +24,21 @@
 <html>
   <?php head("Dashboard Docenti"); ?>
   <body>
+
+    <!-- navbar -->
     <?php 
       $user = $authenticator->get_authenticated_user();
-      $display_name = $user["nome"] . " " . $user["cognome"];
-      navbar($display_name);
+      navbar($user["nome"] . " " . $user["cognome"]);
     ?>
+
+    <!-- content -->
     <div class="container">
       <div class="columns is-centered">
         <div class="column is-10-desktop">
-
           <div class="columns mx-2 is-multiline">
 
             <!-- titolo pagina e sottotitolo -->
-            <div class="column is-12">
-              <h1 class="title is-1">I tuoi insegnamenti</h1>
-              <h2 class="subtitle">Gestisci i calendari d'esame dei tuoi insegnamenti</h2>
-            </div>
+            <?php section_title("I tuoi insegnamenti", "Gestisci i calendari d'esame dei tuoi insegnamenti"); ?>
 
             <!-- card insegnamenti -->
             <?php
@@ -69,8 +69,8 @@
             <?php
               }
             ?>
-          </div>
 
+          </div>
         </div>
       </div>
     </div>
