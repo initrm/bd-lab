@@ -6,6 +6,8 @@
   include_once('./../../../components/head.php');
   include_once('./../../../database.php');
   include_once('./../../../components/navbar.php');
+  include_once('./../../../components/title.php');
+  include_once('./../../../components/select-docenti.php');
 
   $authenticator = new Authenticator();
 
@@ -68,24 +70,16 @@
   $result = $database->execute_query("get_informazioni_corso_laurea", $query_string, $query_params);
   $insegnamenti = $result->all_rows();
 
-  // ottenimento docenti
-  $query_string = "select email, nome, cognome from docenti";
-  $result = $database->execute_query("get_docenti", $query_string, array());
-  $docenti = $result->all_rows();
-
-  // chiusura connessione
-  $database->close_conn();
-
 ?>
 <!DOCTYPE html>
 <html>
   <?php head("Gestione Corso di Laurea"); ?>
   <body>
-    <?php 
-      $user = $authenticator->get_authenticated_user();
-      $display_name = $user["email"];
-      navbar($display_name);
-    ?>
+
+    <!-- navbar -->
+    <?php navbar($authenticator->get_authenticated_user()["email"]); ?>
+
+    <!-- content -->
     <div class="container">
       <div class="columns is-centered">
         <div class="column is-10-desktop">
@@ -102,10 +96,8 @@
               </nav>
             </div>
 
-            <!-- titolo sezione e sottotitolo -->
-            <div class="column is-12">
-              <h1 class="title is-1">Aggiungi insegnamento al corso di laurea</h1>
-            </div>
+            <!-- titolo sezione -->
+            <?php section_title("Aggiungi insegnamento al corso di laurea", NULL); ?>
 
             <!-- form modifica docente -->
             <div class="column is-12">
@@ -161,18 +153,7 @@
 
                   <!-- docente -->
                   <div class="column is-6">
-                    <div class="field">
-                      <label class="label">Docente</label>
-                      <div class="control">
-                        <div class="select is-fullwidth">
-                          <select name="docente">
-                            <?php foreach($docenti as $docente) { ?>
-                              <option value="<?php echo $docente["email"]; ?>"><?php echo $docente["nome"] . " " . $docente["cognome"]; ?></option>
-                            <?php } ?>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
+                    <?php select_docenti($database); ?>
                   </div>
 
                   <!-- submit -->
@@ -199,10 +180,8 @@
               </form>
             </div>
 
-            <!-- titolo sezione e sottotitolo -->
-            <div class="column is-12">
-              <h1 class="title is-1">Insegnamenti del corso di laurea</h1>
-            </div>
+            <!-- titolo sezione -->
+            <?php section_title("Insegnamenti del corso di laurea", NULL); ?>
             
             <!-- card docenti -->
             <?php foreach($insegnamenti as $insegnamento) { ?>
@@ -230,12 +209,13 @@
         </div>
       </div>
     </div>
+
+    <!-- scripts -->
+
     <!-- icone -->
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <?php include_once("./../../../components/icons.php"); ?>
     <!-- toast -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script type="text/javascript" src="/scripts/toast.js"></script>
+    <?php include_once("./../../../components/toasts.php"); ?>
     <!-- mostra toast con esito richiesta aggiunta insegnamento -->
     <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', () => {
@@ -244,5 +224,7 @@
         <?php } ?>
       });
     </script>
+
   </body>
 </html>
+<?php $database->close_conn(); ?>
