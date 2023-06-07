@@ -1,11 +1,15 @@
 <?php
-  error_reporting(E_ERROR | E_PARSE);
+  // error_reporting(E_ERROR | E_PARSE);
 
   include_once('./../../../auth.php');
   include_once('./../../../utype.php');
   include_once('./../../../components/head.php');
   include_once('./../../../database.php');
   include_once('./../../../components/navbar.php');
+  include_once('./../../../components/title.php');
+  include_once('./../../../components/segreteria/propedeutici.php');
+  include_once('./../../../components/segreteria/propedeuticità.php');
+  include_once('./../../../components/select-docenti.php');
 
   $authenticator = new Authenticator();
 
@@ -59,13 +63,7 @@
   }
 
   // ottenimento insegnamento
-  $query_string = "
-    select i.corso_laurea, i.nome, i.descrizione, i.codice, i.anno, cl.nome as nome_corso_laurea, cl.tipo as tipo_corso_laurea, d.nome as nome_docente, d.email as email_docente, d.cognome as cognome_docente
-    from insegnamenti i
-    inner join docenti d on d.email = i.docente
-    inner join corsi_laurea cl on i.corso_laurea = cl.codice
-    where i.corso_laurea = $1 and i.codice = $2
-  ";
+  $query_string = "select * from informazioni_complete_insegnamenti where corso_laurea = $1 and codice = $2";
   $query_params = array($_GET["cdl"], $_GET["codice"]);
   $result = $database->execute_query("get_insegnamento", $query_string, $query_params);
   if($result->row_count() == 0) {
@@ -74,24 +72,16 @@
   }
   $insegnamento = $result->row();
 
-  // ottenimento docenti
-  $query_string = "select email, nome, cognome from docenti";
-  $result = $database->execute_query("get_docenti", $query_string, array());
-  $docenti = $result->all_rows();
-
-  // chiusura connessione
-  $database->close_conn();
-
 ?>
 <!DOCTYPE html>
 <html>
   <?php head("Gestione Insegnamento"); ?>
   <body>
-    <?php 
-      $user = $authenticator->get_authenticated_user();
-      $display_name = $user["email"];
-      navbar($display_name);
-    ?>
+
+    <!-- navbar -->
+    <?php navbar($authenticator->get_authenticated_user()["email"]); ?>
+
+    <!-- content -->
     <div class="container">
       <div class="columns is-centered">
         <div class="column is-10-desktop">
@@ -109,10 +99,8 @@
               </nav>
             </div>
 
-            <!-- titolo sezione e sottotitolo -->
-            <div class="column is-12">
-              <h1 class="title is-1">Informazioni insegnamento</h1>
-            </div>
+            <!-- titolo sezione -->
+            <?php section_title("Informazioni insegnamento", NULL); ?>
 
             <!-- form modifica insegnamento -->
             <div class="column is-12">
@@ -168,21 +156,7 @@
 
                   <!-- docente -->
                   <div class="column is-6">
-                    <div class="field">
-                      <label class="label">Docente</label>
-                      <div class="control">
-                        <div class="select is-fullwidth">
-                          <select name="docente">
-                            <?php foreach($docenti as $docente) { ?>
-                              <option 
-                                <?php if($docente["email"] == $insegnamento["email_docente"]) { ?>selected="selected"<?php } ?> 
-                                value="<?php echo $docente["email"]; ?>"
-                              ><?php echo $docente["nome"] . " " . $docente["cognome"]; ?></option>
-                            <?php } ?>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
+                    <?php select_docenti($database, $insegnamento["email_docente"]); ?>
                   </div>
 
                   <!-- codice originale -->
@@ -213,17 +187,30 @@
                 </div>
               </form>
             </div>
+
+            <!-- titolo e sottotitolo sezione -->
+            <?php section_title("Propedeuticità", "Insegnamenti prepedeutici all'insegnamento"); ?>
+
+            <!-- tabella propedeuticità -->
+            <?php propedeuticità($database, $insegnamento["corso_laurea"], $insegnamento["codice"]); ?>
+
+            <!-- sottotitolo sezione -->
+            <?php section_title(NULL, "Insegnamenti che hanno l'insegnamento come propedeuticità"); ?>
+
+            <!-- tabella propedeutici -->
+            <?php propedeutici($database, $insegnamento["corso_laurea"], $insegnamento["codice"]); ?>
             
           </div>
         </div>
       </div>
     </div>
+
+    <!-- scripts -->
+
     <!-- icone -->
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <?php include_once("./../../../components/icons.php"); ?>
     <!-- toast -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script type="text/javascript" src="/scripts/toast.js"></script>
+    <?php include_once("./../../../components/toasts.php"); ?>
     <!-- mostra toast con esito richiesta iscrizione -->
     <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', () => {
@@ -232,5 +219,7 @@
         <?php } ?>
       });
     </script>
+
   </body>
 </html>
+<?php $database->close_conn(); ?>
