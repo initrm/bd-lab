@@ -7,17 +7,23 @@
    * tabelle contenenti la carriera completa e la tabella valida dello studente e queste ultime
    * 
    * $matricola deve corrispondere ad un intero che identifica uno studente (matricola)
+   * $storico se è true considera lo studente come di storico e non attivo, altrimenti, il contrario
    */
-  function carriera(Database $database, int $matricola) {
+  function carriera(Database $database, int $matricola, ?bool $storico = false) {
+
+    if($storico == NULL) $storico = false;
+
+    $carriera_completa_func = $storico ? "produci_carriera_completa_studente_storico" : "produci_carriera_completa_studente";
+    $carriera_valida_func = $storico ? "produci_carriera_valida_studente_storico" : "produci_carriera_valida_studente";
 
     // ottenimento carriera completa
-    $query_string = "select * from produci_carriera_completa_studente($1)";
+    $query_string = "select * from $carriera_completa_func($1)";
     $query_params = array($matricola);
     $result = $database->execute_query("get_carriera_completa", $query_string, $query_params);
     $carriera_completa = $result->all_rows();
 
     // ottenimento carriera valida
-    $query_string = "select * from produci_carriera_valida_studente($1)";
+    $query_string = "select * from $carriera_valida_func($1)";
     $query_params = array($matricola);
     $result = $database->execute_query("get_carriera_valida", $query_string, $query_params);
     $carriera_valida = $result->all_rows();

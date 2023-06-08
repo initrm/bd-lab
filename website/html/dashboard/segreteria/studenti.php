@@ -47,10 +47,15 @@
       $error_msg = "Parametri mancanti.";
   }
   
-  // ottenimento studenti
-  $query_string = "select matricola, email, nome, cognome, corso_laurea from studenti";
+  // ottenimento studenti attivi
+  $query_string = "select matricola, email, nome, cognome, corso_laurea from studenti order by matricola asc";
   $result = $database->execute_query("get_studenti", $query_string, array());
   $studenti = $result->all_rows();
+
+  // ottenimento storico studenti
+  $query_string = "select * from storico_studenti order by matricola asc";
+  $result = $database->execute_query("get_storico_studenti", $query_string, array());
+  $storico = $result->all_rows();
 
   // ottenimento corsi laurea
   $query_string = "select * from corsi_laurea";
@@ -63,7 +68,7 @@
 ?>
 <!DOCTYPE html>
 <html>
-  <?php head("Gestione Studente"); ?>
+  <?php head("Gestione Studenti"); ?>
   <body>
 
     <!-- navbar -->
@@ -174,24 +179,60 @@
 
             <!-- titolo sezione -->
             <?php section_title("Lista studenti"); ?>
+
+            <!-- selezione tipo di studenti da visualizzare -->
+            <div class="column is-12">
+              <div class="select">
+                <select id="tipo-studenti-select" onchange="handleTipoStudentiSelect()">
+                  <option value="attivi">Attivi</option>
+                  <option value="storico">Storico</option>
+                </select>
+              </div>
+            </div>
             
             <!-- card studenti -->
-            <?php foreach($studenti as $studente) { ?>
-              <div class="column is-12">
-                <div class="box">
-                  <div class="columns">
-                    <div class="column is-8 is-flex is-align-items-center">
-                      <p><strong><?php echo "[" . $studente["matricola"] . "]"; ?></strong> <?php echo $studente["nome"] . " " . $studente["cognome"] . " (" . $studente["email"] . ")"; ?></p>
-                    </div>
-                    <div class="column is-4 is-flex is-justify-content-end">
-                      <a href="/dashboard/segreteria/studente.php?matricola=<?php echo $studente["matricola"] ?>" class="button is-link is-outlined">
-                        <ion-icon name="arrow-forward-outline"></ion-icon>
-                      </a>
+            <div id="lista-attivi" class="column is-12">
+              <div class="columns is-multiline">
+                <?php foreach($studenti as $studente) { ?>
+                  <div  class="column is-12">
+                    <div class="box">
+                      <div class="columns">
+                        <div class="column is-8 is-flex is-align-items-center">
+                          <p><strong><?php echo "[" . $studente["matricola"] . "]"; ?></strong> <?php echo $studente["nome"] . " " . $studente["cognome"] . " (" . $studente["email"] . ")"; ?></p>
+                        </div>
+                        <div class="column is-4 is-flex is-justify-content-end">
+                          <a href="/dashboard/segreteria/studente.php?matricola=<?php echo $studente["matricola"] ?>" class="button is-link is-outlined">
+                            <ion-icon name="arrow-forward-outline"></ion-icon>
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                <?php } ?>
               </div>
-            <?php } ?>
+            </div>
+
+            <!-- card studenti storico -->
+            <div id="lista-storico" class="column is-12 is-hidden">
+              <div class="columns">
+                <?php foreach($storico as $studente) { ?>
+                  <div class="column is-12">
+                    <div class="box">
+                      <div class="columns">
+                        <div class="column is-8 is-flex is-align-items-center">
+                          <p><strong><?php echo "[" . $studente["matricola"] . "]"; ?></strong> <?php echo $studente["nome"] . " " . $studente["cognome"] . " (" . $studente["email"] . ")"; ?></p>
+                        </div>
+                        <div class="column is-4 is-flex is-justify-content-end">
+                          <a href="/dashboard/segreteria/studente.php?storico=true&matricola=<?php echo $studente["matricola"] ?>" class="button is-link is-outlined">
+                            <ion-icon name="arrow-forward-outline"></ion-icon>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <?php } ?>
+              </div>
+            </div>
             
           </div>
         </div>
@@ -211,6 +252,22 @@
           showSuccessToast("Studente creato con successo.");
         <?php } ?>
       });
+    </script>
+    <!-- gestisce tipo di studenti da visualizzare -->
+    <script type="text/javascript">
+      function handleTipoStudentiSelect() {
+        let val = document.getElementById("tipo-studenti-select").value;
+        let containerAttivi = document.getElementById("lista-attivi");
+        let containerStorico = document.getElementById("lista-storico");
+        if(val === 'storico') {
+          containerAttivi.classList.add("is-hidden");
+          containerStorico.classList.remove("is-hidden");
+        }
+        else {
+          containerStorico.classList.add("is-hidden");
+          containerAttivi.classList.remove("is-hidden");
+        }
+      }
     </script>
 
   </body>

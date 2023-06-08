@@ -29,6 +29,10 @@
     die();
   }
 
+  // definizione table di ricerca
+  $table_studenti = isset($_GET["storico"]) && $_GET["storico"] == true ? "storico_studenti" : "studenti";
+  $table_esami = isset($_GET["storico"]) && $_GET["storico"] == true ? "storico_esami" : "esami";
+
   // apertura connessione con il database
   $database = new Database();
   $database->open_conn();
@@ -36,12 +40,12 @@
   // eventuale messaggio di errore
   $error_msg = NULL;
 
-  // gestione della eventuale richiesta di modifica del docente
+  // gestione della eventuale richiesta di modifica dello studente
   if($_SERVER["REQUEST_METHOD"] == "POST") {
     // verifica presenza parametri
     if(isset($_POST["nome"]) && isset($_POST["cognome"]) && isset($_POST["email"])) {
       // tentativo di aggiornamento dello studente
-      $query_string = "update studenti set email = $1, nome = $2, cognome = $3 where matricola = $4";
+      $query_string = "update $table_studenti set email = $1, nome = $2, cognome = $3 where matricola = $4";
       $query_params = array($_POST["email"] . "@uniesempio.it", $_POST["nome"], $_POST["cognome"], $_GET["matricola"]);
       try {
         $r = $database->execute_query("update_studente", $query_string, $query_params);
@@ -57,7 +61,7 @@
   }
 
   // ottenimento studente
-  $query_string = "select matricola, email, nome, cognome from studenti where matricola = $1";
+  $query_string = "select matricola, email, nome, cognome from $table_studenti where matricola = $1";
   $query_params = array($_GET["matricola"]);
   $result = $database->execute_query("get_studente", $query_string, $query_params);
   if($result->row_count() == 0) {
@@ -162,7 +166,7 @@
             <?php section_title("Carriera dello studente"); ?>
             
             <!-- select e tabelle -->
-            <?php carriera($database, $studente["matricola"]); ?>
+            <?php carriera($database, $studente["matricola"], $_GET["storico"]); ?>
             
           </div>
         </div>
