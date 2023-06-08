@@ -7,7 +7,7 @@
   include_once('./../../../database.php');
   include_once('./../../../components/navbar.php');
   include_once('./../../../components/title.php');
-  include_once('./../../../components/studenti/exam-table.php');
+  include_once('./../../../components/studenti/carriera.php');
 
   $authenticator = new Authenticator();
 
@@ -59,21 +59,6 @@
   $query_params = array($authenticator->get_authenticated_user()["matricola"]);
   $result = $database->execute_query("get_appelli_disponibili", $query_string, $query_params);
   $appelli = $result->all_rows();
-
-  // ottenimento carriera completa
-  $query_string = "select * from produci_carriera_completa_studente($1)";
-  $query_params = array($authenticator->get_authenticated_user()["matricola"]);
-  $result = $database->execute_query("get_carriera_completa", $query_string, $query_params);
-  $carriera_completa = $result->all_rows();
-
-  // ottenimento carriera valida
-  $query_string = "select * from produci_carriera_valida_studente($1)";
-  $query_params = array($authenticator->get_authenticated_user()["matricola"]);
-  $result = $database->execute_query("get_carriera_valida", $query_string, $query_params);
-  $carriera_valida = $result->all_rows();
-
-  // chiusura connessione
-  $database->close_conn();
 
 ?>
 <!DOCTYPE html>
@@ -150,29 +135,8 @@
               <h2 class="subtitle">Visualizza la tua carriera</h2>
             </div>
 
-            <!-- selezione tipo di carriera da visualizzare -->
-            <div class="column is-12">
-              <div class="select">
-                <select id="tipo-carriera-select" onchange="handleTipoCarrieraSelect()">
-                  <option value="completa">Carriera completa</option>
-                  <option value="valida">Carriera valida</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- carriera completa -->
-            <div id="carriera-completa" class="column is-12">
-              <div class="box">
-                <?php exam_table($carriera_completa); ?>
-              </div>
-            </div>
-
-            <!-- carriera valida -->
-            <div id="carriera-valida" class="column is-12 is-hidden">
-              <div class="box">
-                <?php exam_table($carriera_valida); ?>
-              </div>
-            </div>
+            <!-- select e tabelle carriera -->
+            <?php carriera($database, $authenticator->get_authenticated_user()["matricola"]); ?>
 
           </div>
         </div>
@@ -193,22 +157,7 @@
         <?php } ?>
       });
     </script>
-    <!-- gestisce tipo di carriera da visualizzare -->
-    <script type="text/javascript">
-      function handleTipoCarrieraSelect() {
-        let val = document.getElementById("tipo-carriera-select").value;
-        let containerCompleta = document.getElementById("carriera-completa");
-        let containerValida = document.getElementById("carriera-valida");
-        if(val === 'valida') {
-          containerCompleta.classList.add("is-hidden");
-          containerValida.classList.remove("is-hidden");
-        }
-        else {
-          containerValida.classList.add("is-hidden");
-          containerCompleta.classList.remove("is-hidden");
-        }
-      }
-    </script>
 
   </body>
 </html>
+<?php $database->close_conn(); ?>
