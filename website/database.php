@@ -1,9 +1,26 @@
 <?php
+  include_once(dirname(__FILE__) . "/utype.php");
 
   class Database {
 
     // variabile che contiene la connessione utilizzata per l'esecuzione delle query
     private $connection = NULL;
+    // variabile che contiene le credenziali dell'utente da utilizzare per effettuare la connessione al database
+    private $database_user = NULL;
+
+    function __construct(UserType $user_type) {
+      switch($user_type) {
+        case UserType::Studente:
+          $this->database_user = array("username" => "studente", "password" => "studente");
+          break;
+        case UserType::Docente:
+          $this->database_user = array("username" => "docente", "password" => "docente");
+          break;
+        case UserType::Segreteria:
+          $this->database_user = array("username" => "segreteria", "password" => "segreteria");
+          break;
+      }
+    }
 
     /**
      * apre una nuova connessione verso il database e setta il search path automaticamento sullo schema del progetto
@@ -12,7 +29,7 @@
     function open_conn() {
       if($this->connection != NULL)
         throw new Exception("Connessione non aperta.");
-      $this->connection = pg_connect("host=pgsql user=progetto password=progetto dbname=progetto_esame");
+      $this->connection = pg_connect("host=pgsql user=" . $this->database_user["username"] . " password=" . $this->database_user["password"] . " dbname=progetto_esame");
       $this->execute_query("set_search_path", "set search_path to progetto_esame", array());
     }
 
@@ -84,7 +101,7 @@
    */
   class QueryError extends Exception {
     public function __construct($message, $code = 0, Throwable $previous = null) {
-      parent::__construct(trim(explode("CONTEXT:", $message)[0]) . ".", $code, $previous);
+      parent::__construct(trim(explode("CONTEXT:", $message)[0]), $code, $previous);
     }
   }
 

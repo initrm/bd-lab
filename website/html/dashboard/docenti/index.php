@@ -21,7 +21,7 @@
   }
 
   // ottenimento insegnamenti del docente
-  $database = new Database();
+  $database = new Database($authenticator->get_authenticated_user_type());
   $query_string = "select * from insegnamenti where docente = $1";
   $query_params = array($authenticator->get_authenticated_user()["email"]);
   $result = $database->execute_single_query($query_string, $query_params);

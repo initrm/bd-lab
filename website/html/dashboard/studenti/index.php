@@ -24,7 +24,7 @@
   }
 
   // apertura connessione con il database
-  $database = new Database();
+  $database = new Database($authenticator->get_authenticated_user_type());
   $database->open_conn();
 
   // eventuale messaggio di errore

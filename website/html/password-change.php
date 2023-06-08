@@ -26,7 +26,7 @@
 
         // verifica correttezza
         if(strlen($_POST["nuova_password"]) > 6 && strlen($_POST["nuova_password"]) <= 128) {
-          $database = new Database();
+          $database = new Database($authenticator->get_authenticated_user_type());
           $database->open_conn();
 
           $table = NULL;

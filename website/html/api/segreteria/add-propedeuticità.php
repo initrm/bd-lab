@@ -35,7 +35,7 @@
   }
   
   // apertura connessione con il database
-  $database = new Database();
+  $database = new Database($authenticator->get_authenticated_user_type());
   $database->open_conn();
 
   // tentativo di inserimento della propedeuticità

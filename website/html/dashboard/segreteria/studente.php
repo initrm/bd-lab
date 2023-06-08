@@ -34,7 +34,7 @@
   $table_esami = isset($_GET["storico"]) && $_GET["storico"] == true ? "storico_esami" : "esami";
 
   // apertura connessione con il database
-  $database = new Database();
+  $database = new Database($authenticator->get_authenticated_user_type());
   $database->open_conn();
 
   // eventuale messaggio di errore

@@ -23,7 +23,7 @@
   }
 
   // apertura connessione con il database
-  $database = new Database();
+  $database = new Database($authenticator->get_authenticated_user_type());
   $database->open_conn();
 
   // eventuale messaggio di errore
@@ -48,7 +48,7 @@
   $appello = $result->row();
 
   // ottenimento studenti iscritti all'appello
-  $query_string = "select * from get_iscrizioni_ad_appello($1)";
+  $query_string = "select * from get_iscrizioni_appello($1)";
   $query_params = array($appello["id"]);
   $result = $database->execute_query("get_iscrizioni_appello", $query_string, $query_params);
   $studenti = $result->all_rows();

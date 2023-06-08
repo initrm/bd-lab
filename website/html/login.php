@@ -47,7 +47,7 @@
       $query_params = array($_POST["email"], $_POST["password"]);
 
       // esecuzione della query
-      $query_result = (new Database())->execute_single_query($query_string, $query_params);
+      $query_result = (new Database($user_type))->execute_single_query($query_string, $query_params);
       
       // accesso fallito
       if($query_result->row_count() == 0)
