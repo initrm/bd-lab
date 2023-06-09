@@ -8,6 +8,7 @@
   include_once('./../../../components/navbar.php');
   include_once('./../../../components/title.php');
   include_once('./../../../components/studenti/carriera.php');
+  include_once('./../../../components/error.php');
 
   $authenticator = new Authenticator();
 
@@ -52,7 +53,7 @@
         if($r->affected_rows() == 0)
           $error_msg = "Errore sconosciuto.";
       }
-      catch(QueryError $e) {
+      catch(Exception $e) {
         $error_msg = $e->getMessage();
       }
     }
@@ -96,10 +97,20 @@
               </nav>
             </div>
 
-            <!-- titolo sezione -->
-            <?php section_title("Informazioni studente"); ?>
+            <?php if(isset($_GET["storico"]) && $_GET["storico"] == true) { ?>
+              <div class="column is-12">
+                <article class="message is-warning">
+                  <div class="message-body">
+                    Si sta visualizzando il profilo di un utente <strong>eliminato</strong>, tale utente non è più attivo nel sistema.
+                  </div>
+                </article>
+              </div>
+            <?php } ?>
 
-            <!-- form modifica docente -->
+            <!-- titolo sezione -->
+            <?php section_title("Informazioni"); ?>
+
+            <!-- form modifica studente -->
             <div class="column is-12">
               <form method="post" class="box my-3">
 
@@ -150,23 +161,42 @@
                   </div>
 
                   <!-- error message -->
-                  <div class="column is-12">
-                    <?php if($error_msg != NULL) { ?>
-                      <p class="help is-danger">
-                        <?php echo $error_msg; ?>
-                      </p>
-                    <?php } ?>
-                  </div>
+                  <?php error_message($error_msg) ?>
 
                 </div>
               </form>
             </div>
 
             <!-- titolo sezione -->
-            <?php section_title("Carriera dello studente"); ?>
+            <?php section_title("Carriera"); ?>
             
             <!-- select e tabelle -->
             <?php carriera($database, $studente["matricola"], $_GET["storico"]); ?>
+
+            <!-- eliminazione studente -->
+            <?php if(!isset($_GET["storico"]) || $_GET["storico"] != true) { ?>
+              <!-- titolo sezione -->
+              <?php section_title("Eliminazione", "Rimuovi studente in seguito a laurea o rinuncia agli studi"); ?>
+
+              <!-- form per eliminazione studente -->
+              <div class="column is-12">
+                <div class="box">
+                  <div class="columns is-multiline">
+                    <div class="column is-10">L'eliminazione dello studente non comporta la perdita dei dati relativi a quest'ultimo o alla relativa carriera. Lo studente eliminato non sarà più in grado di autenticarsi. L'operazione è irreversibile.</div>
+                    <div class="column is-2">
+                      <div class="field">
+                        <div class="control">
+                          <button onclick="handleEliminazioneStudente()" class="button is-fullwidth is-danger is-outlined">
+                            <ion-icon name="trash"></ion-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <?php } ?>
             
           </div>
         </div>
@@ -179,6 +209,8 @@
     <?php include_once("./../../../components/icons.php"); ?>
     <!-- toast -->
     <?php include_once("./../../../components/toasts.php"); ?>
+    <!-- axios -->
+    <?php include_once("./../../../components/axios.php"); ?>
     <!-- mostra toast con esito richiesta iscrizione -->
     <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', () => {
@@ -186,6 +218,18 @@
           showSuccessToast("Studente modificato con successo.");
         <?php } ?>
       });
+    </script>
+    <!-- gestisce eliminazione dello studente -->
+    <script type="text/javascript">
+      function handleEliminazioneStudente() {
+        axios.delete("/api/segreteria/delete-studente.php", {
+          params: {
+            matricola: <?php echo $_GET["matricola"]; ?>
+          }
+        })
+        .then((response) => window.location.replace("/dashboard/segreteria/studente.php?storico=true&matricola=<?php echo $_GET["matricola"]; ?>"))
+        .catch(({ response: { data } }) => showDangerToast(data.message));
+      }
     </script>
 
   </body>
