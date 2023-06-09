@@ -22,13 +22,16 @@
     die();
   }
 
+  // controllo presenza parametro get
+  if(!isset($_GET["id"])) {
+    header("location: /dashboard/docenti/index.php");
+    die();
+  }
+
   // apertura connessione con il database
   $database = new Database($authenticator->get_authenticated_user_type());
   $database->open_conn();
 
-  // eventuale messaggio di errore
-  $error_msg = NULL;
-  
   // ottenimento dell'appello e dell'insegnamento
   // ok quando esiste l'appello, esiste l'insegnamento ed è di proprietà dell'utente loggato
   $query_string = "
@@ -46,6 +49,28 @@
     die();
   }
   $appello = $result->row();
+
+  // eventuale messaggio di errore
+  $error_msg = NULL;
+
+  // gestione richiesta di eliminazione dell'appello, posto dopo SELECT in quanto così ho l'insegnamento al quale
+  // fare redirect in caso in cui l'eliminazione avvenga con successo
+  if($_SERVER["REQUEST_METHOD"] == "POST") {
+    // se arrivati a questo punto parametro get per forza presente, no necessità controllo
+    // già verificato che appello esiste e di proprietà del docente
+    // tentativo di eliminazione dell'appello
+    $query_string = "delete from appelli where id = $1";
+    $query_params = array($_GET["id"]);
+    try {
+      $database->execute_query("delete_appello", $query_string, $query_params);
+      // successo, redirect alla pagina degli appelli dell'insegnamento
+      header("location: /dashboard/docenti/appelli.php?cdl=" . $appello["corso_laurea"] . "&insegnamento=" . $appello["codice"]);
+      die();
+    }
+    catch(QueryError $e) {
+      $error_msg = $e->getMessage();
+    }
+  }
 
   // ottenimento studenti iscritti all'appello
   $query_string = "select * from get_iscrizioni_appello($1)";
@@ -89,6 +114,40 @@
                 </ul>
               </nav>
             </div>
+
+            <!-- form per l'eliminazione dell'appello (visualizzato se appello è nel futuro o passato ma con zero iscritti) -->
+            <?php 
+              $now = date_create();
+              $data_appello = date_create($appello["data"]);
+              if($data_appello > $now || ($data_appello <= $now && sizeof($studenti) == 0)) {
+            ?>
+                <div class="column is-12">
+                  <form class="box" method="post">
+                    <div class="columns is-multiline">
+                      <div class="column is-10">
+                        <p class="mr-2">L'appello può essere eliminato, se si procede con l'eliminazione, tutti gli studenti iscritti verranno automaticamente disiscritti. L'operazione è irreversibile.</p>
+                      </div>
+                      <div class="column is-2">
+                        <div class="field">
+                          <div class="control">
+                            <button class="button is-fullwidth is-danger is-outlined">
+                              <ion-icon name="trash"></ion-icon>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- error message -->
+                      <?php if($error_msg != NULL) { ?>
+                        <div class="column is-12">
+                          <p class="help is-danger">
+                            <?php echo $error_msg; ?>
+                          </p>
+                        </div>
+                      <?php } ?>
+                    </div>
+                  </form>
+                </div>
+            <?php } ?>
 
             <!-- scritta nel caso in cui non ci siano appelli -->
             <?php if(sizeof($studenti) == 0) { ?>
