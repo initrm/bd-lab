@@ -214,7 +214,7 @@
 
             <!-- card studenti storico -->
             <div id="lista-storico" class="column is-12 is-hidden">
-              <div class="columns">
+              <div class="columns is-multiline">
                 <?php foreach($storico as $studente) { ?>
                   <div class="column is-12">
                     <div class="box">
