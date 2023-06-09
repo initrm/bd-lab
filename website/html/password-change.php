@@ -2,6 +2,7 @@
   include_once('./../auth.php');
   include_once('./../components/head.php');
   include_once('./../database.php');
+  include_once('./../components/error.php');
 
   $authenticator = new Authenticator();
 
@@ -105,25 +106,21 @@
               </div>
             </div>
 
-            <div class="columns">
-              <div class="column is-flex is-justify-content-end is-align-items-end">
+            <div class="columns is-multiline">
 
-                <!-- tasto submit -->
+              <!-- submit -->
+              <div class="column is-12 is-flex is-justify-content-end is-align-items-end">
                 <div class="field">
                   <div class="control">
                     <button class="button is-link is-outlined">Modifica password</button>
                   </div>
                 </div>
-
               </div>
-            </div>
 
-            <!-- error message -->
-            <?php if(isset($GLOBALS["error_msg"])) { ?>
-              <p class="help is-danger">
-                <?php echo $GLOBALS["error_msg"]; ?>
-              </p>
-            <?php } ?>
+              <!-- error message -->
+              <?php error_message($error_msg); ?>
+
+            </div>
 
           </form>
 

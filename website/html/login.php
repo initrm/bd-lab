@@ -3,6 +3,7 @@
   include_once('./../auth.php');
   include_once('./../components/head.php');
   include_once('./../utype.php');
+  include_once('./../components/error.php');
 
   $authenticator = new Authenticator();
 
@@ -98,14 +99,14 @@
               </div>
             </div>
 
-            <div class="columns">
-              <div class="column">
+            <div class="columns is-multiline">
 
-                <!-- tipo di account -->
+              <!-- tipo di account -->
+              <div class="column is-half">
                 <div class="field">
                   <label class="label">Tipo di account</label>
                   <div class="control">
-                    <div class="select">
+                    <div class="select is-fullwidth">
                       <select name="tipo_utente">
                         <option value="studente">Studente</option>
                         <option value="docente">Docente</option>
@@ -114,26 +115,21 @@
                     </div>
                   </div>
                 </div>
-
               </div>
-              <div class="column is-flex is-justify-content-end is-align-items-end">
 
-                <!-- tasto submit -->
+              <!-- submit -->
+              <div class="column is-half is-flex is-justify-content-end is-align-items-end">
                 <div class="field">
                   <div class="control">
                     <button class="button is-link is-outlined">Accedi</button>
                   </div>
                 </div>
-
               </div>
-            </div>
 
-            <!-- error message -->
-            <?php if($error_msg != NULL) { ?>
-              <p class="help is-danger">
-                <?php echo $error_msg; ?>
-              </p>
-            <?php } ?>
+              <!-- error message -->
+              <?php error_message($error_msg); ?>
+
+            </div>
 
           </form>
 

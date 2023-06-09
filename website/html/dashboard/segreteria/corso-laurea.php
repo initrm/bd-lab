@@ -8,6 +8,7 @@
   include_once('./../../../components/navbar.php');
   include_once('./../../../components/title.php');
   include_once('./../../../components/select-docenti.php');
+  include_once('./../../../components/error.php');
 
   $authenticator = new Authenticator();
 
@@ -168,13 +169,7 @@
                   </div>
 
                   <!-- error message -->
-                  <div class="column is-12">
-                    <?php if($error_msg != NULL) { ?>
-                      <p class="help is-danger">
-                        <?php echo $error_msg; ?>
-                      </p>
-                    <?php } ?>
-                  </div>
+                  <?php error_message($error_msg); ?>
 
                 </div>
               </form>
