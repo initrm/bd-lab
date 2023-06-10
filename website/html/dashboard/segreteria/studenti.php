@@ -36,7 +36,7 @@
     if(isset($_POST["nome"]) && isset($_POST["cognome"]) && isset($_POST["email"]) && isset($_POST["corso-laurea"])) {
       // tentativo di creazione dello studente
       $query_string = "insert into studenti(email, nome, cognome, password, corso_laurea) values ($1, $2, $3, $4, $5)";
-      $query_params = array($_POST["email"] . "@uniesempio.it", $_POST["nome"], $_POST["cognome"], $_POST["nome"] . "." . $_POST["cognome"], $_POST["corso-laurea"]);
+      $query_params = array($_POST["email"] . "@uniesempio.it", $_POST["nome"], $_POST["cognome"], strtolower($_POST["nome"] . "." . $_POST["cognome"]), $_POST["corso-laurea"]);
       try {
         $database->execute_query("insert_studente", $query_string, $query_params);
       }
