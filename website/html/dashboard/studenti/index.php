@@ -138,6 +138,15 @@
             <!-- select e tabelle carriera -->
             <?php carriera($database, $authenticator->get_authenticated_user()["matricola"]); ?>
 
+            <!-- titolo sezione -->
+            <?php section_title("Informazioni corsi", "Cerca tra i corsi di laurea e visualizza le relative informazioni"); ?>
+            
+            <div class="column is-12">
+                <a href="/dashboard/studenti/corsi-laurea.php" class="button is-link is-outlined is-fullwidth">
+                  Vai
+                </a>
+            </div>
+
           </div>
         </div>
       </div>
