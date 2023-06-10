@@ -178,7 +178,7 @@
             <!-- titolo sezione -->
             <?php section_title("Insegnamenti del corso di laurea"); ?>
             
-            <!-- card docenti -->
+            <!-- card insegnamenti -->
             <?php foreach($insegnamenti as $insegnamento) { ?>
               <div class="column is-12">
                 <div class="card mb-5">
