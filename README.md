@@ -21,6 +21,8 @@ A simple (i.e. imperfect) application that simulates a complete University onlin
 |  +--> components: contains all the php files which renders only components of pages and that are not meant to be used standalone
 |
 +--> ambiente: contains all the files that are used to run stuff used to run the project
+|
++--> documenti: contains all the docs required for the exam
 ```
 ## License
 
