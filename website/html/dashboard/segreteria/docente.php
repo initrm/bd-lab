@@ -106,7 +106,7 @@
             </div>
 
             <!-- titolo sezione -->
-            <?php section_title("Informazioni docente"); ?>
+            <?php section_title("Informazioni"); ?>
 
             <!-- form modifica docente -->
             <div class="column is-12">
@@ -169,9 +169,9 @@
             </div>
 
             <!-- titolo sezione -->
-            <?php section_title("Insegnamenti del docente"); ?>
+            <?php section_title("Insegnamenti"); ?>
             
-            <!-- card docenti -->
+            <!-- card insegnamenti -->
             <?php foreach($insegnamenti as $insegnamento) { ?>
               <div class="column is-12">
                 <div class="card mb-5">
@@ -188,6 +188,16 @@
                 </div>
               </div>
             <?php } ?>
+
+            <!-- titolo sezione -->
+            <?php section_title("Eliminazione"); ?>
+
+            <!-- eliminazione docente -->
+            <div class="column is-12">
+              <a href="/dashboard/segreteria/delete-docente.php?email=<?php echo $docente["email"]; ?>" class="button is-danger is-outlined is-fullwidth">
+                Elimina
+              </a>
+            </div>
             
           </div>
         </div>
