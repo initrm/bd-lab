@@ -37,6 +37,28 @@
   // eventuale messaggio di errore
   $error_msg = NULL;
 
+  // gestione della eventuale richiesta di modifica cdl
+  if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["action"] == "update-cdl") {
+    // verifica presenza parametri
+    if(isset($_POST["nome"]) && isset($_POST["tipo"])) {
+      // tentativo di aggiornamento del cdl
+      $query_string = "update corsi_laurea set nome = $1, tipo = $2 where codice = $3";
+      $query_params = array($_POST["nome"], $_POST["tipo"], $_GET["codice"]);
+      try {
+        $result = $database->execute_query("update_cdl", $query_string, $query_params);
+        if($result->affected_rows() != 0) { // se == 0, ovvero corso non esiste, subito dopo si viene reinidirizzati
+          header("location: /dashboard/segreteria/corso-laurea.php?codice=" . $_GET["codice"]);
+          die();
+        }
+      }
+      catch(QueryError $e) {
+        $error_msg = $e->getMessage();
+      }
+    }
+    else 
+      $error_msg = "Parametri mancanti.";
+  }
+
   // ottenimento corso laurea
   $query_string = "select * from corsi_laurea where codice = $1";
   $query_params = array($_GET["codice"]);
@@ -48,7 +70,7 @@
   $corso_laurea = $result->row();
 
   // gestione della eventuale richiesta di aggiunta insegnamento
-  if($_SERVER["REQUEST_METHOD"] == "POST") {
+  if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["action"]) && $_POST["action"] == "add-insegnamento") {
     // verifica presenza parametri
     if(isset($_POST["codice"]) && isset($_POST["nome"]) && isset($_POST["descrizione"]) && isset($_POST["anno"]) && isset($_POST["docente"])) {
       // tentativo di creazione dell'insegnamento
@@ -98,13 +120,79 @@
             </div>
 
             <!-- titolo sezione -->
-            <?php section_title("Aggiungi insegnamento al corso di laurea"); ?>
+            <?php section_title("Modifica corso"); ?>
 
-            <!-- form modifica docente -->
+            <!-- form modifica cdl -->
             <div class="column is-12">
               <form method="post" class="box my-3">
 
                 <div class="columns is-multiline">
+
+                  <!-- azione -->
+                  <input type="hidden" value="update-cdl" name="action" />
+
+                  <!-- codice -->
+                  <div class="column is-5">
+                    <div class="field">
+                      <label class="label">Codice</label>
+                      <div class="control">
+                        <input disabled="true" value="<?php echo $corso_laurea["codice"]; ?>" minlength="2" class="input" type="text" required="true" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- nome -->
+                  <div class="column is-5">
+                    <div class="field">
+                      <label class="label">Nome</label>
+                      <div class="control">
+                        <input value="<?php echo $corso_laurea["nome"]; ?>" minlength="2" name="nome" class="input" type="text" required="true" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- tipo -->
+                  <div class="column is-2">
+                    <div class="field">
+                      <label class="label">Tipo</label>
+                      <div class="control">
+                        <div class="select">
+                          <select name="tipo">
+                            <option <?php if($corso_laurea["tipo"] == "T") { ?> selected="selected" <?php } ?> value="T">Triennale</option>
+                            <option <?php if($corso_laurea["tipo"] == "M") { ?> selected="selected" <?php } ?> value="M">Magistrale</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- submit -->
+                  <div class="column is-12 is-flex is-justify-content-end">
+                    <div class="field">
+                      <div class="control">
+                        <button class="button is-link is-outlined is-fullwidth">Salva modifiche</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- error message -->
+                  <?php error_message($error_msg); ?>
+
+                </div>
+              </form>
+            </div>
+
+            <!-- titolo sezione -->
+            <?php section_title("Aggiungi insegnamento al corso di laurea"); ?>
+
+            <!-- form inserimento insegnamento -->
+            <div class="column is-12">
+              <form method="post" class="box my-3">
+
+                <div class="columns is-multiline">
+
+                  <!-- azione -->
+                  <input type="hidden" value="add-insegnamento" name="action" />
 
                   <!-- codice -->
                   <div class="column is-6">
@@ -162,7 +250,7 @@
                     <div class="field">
                       <div class="control">
                         <button class="button is-link is-outlined is-fullwidth">
-                          Salva modifiche
+                          Aggiungi insegnamento
                         </button>
                       </div>
                     </div>
