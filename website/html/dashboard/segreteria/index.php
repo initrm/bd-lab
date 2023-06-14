@@ -44,7 +44,7 @@
             <?php menu_item_card("Gestione docenti", "Visualizza, aggiungi e rimuovi docenti.", "/dashboard/segreteria/docenti.php"); ?>
 
             <!-- gestione cdl -->
-            <?php menu_item_card("Gestione corsi di laurea", "Visualizza, aggiungi e rimuovi corsi di laurea.", "/dashboard/segreteria/corsi-laurea.php"); ?>
+            <?php menu_item_card("Gestione corsi di laurea", "Visualizza e aggiungi corsi di laurea.", "/dashboard/segreteria/corsi-laurea.php"); ?>
 
           </div>
         </div>
