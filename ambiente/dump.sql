@@ -5,7 +5,7 @@
 -- Dumped from database version 15.3 (Debian 15.3-1.pgdg110+1)
 -- Dumped by pg_dump version 15.3 (Homebrew)
 
--- Started on 2023-06-13 21:26:10 CEST
+-- Started on 2023-06-14 12:10:21 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -29,7 +29,7 @@ CREATE SCHEMA progetto_esame;
 ALTER SCHEMA progetto_esame OWNER TO progetto;
 
 --
--- TOC entry 889 (class 1247 OID 16511)
+-- TOC entry 890 (class 1247 OID 16511)
 -- Name: anno_insegnamento; Type: DOMAIN; Schema: progetto_esame; Owner: progetto
 --
 
@@ -40,7 +40,7 @@ CREATE DOMAIN progetto_esame.anno_insegnamento AS integer
 ALTER DOMAIN progetto_esame.anno_insegnamento OWNER TO progetto;
 
 --
--- TOC entry 882 (class 1247 OID 16404)
+-- TOC entry 883 (class 1247 OID 16404)
 -- Name: tipo_corso_laurea; Type: DOMAIN; Schema: progetto_esame; Owner: progetto
 --
 
@@ -51,7 +51,7 @@ CREATE DOMAIN progetto_esame.tipo_corso_laurea AS character(1)
 ALTER DOMAIN progetto_esame.tipo_corso_laurea OWNER TO progetto;
 
 --
--- TOC entry 902 (class 1247 OID 16622)
+-- TOC entry 903 (class 1247 OID 16622)
 -- Name: valutazione_esame; Type: DOMAIN; Schema: progetto_esame; Owner: progetto
 --
 
@@ -62,7 +62,7 @@ CREATE DOMAIN progetto_esame.valutazione_esame AS integer
 ALTER DOMAIN progetto_esame.valutazione_esame OWNER TO progetto;
 
 --
--- TOC entry 252 (class 1255 OID 16705)
+-- TOC entry 253 (class 1255 OID 16705)
 -- Name: controllo_anno_insegnamento(); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -90,7 +90,7 @@ $$;
 ALTER FUNCTION progetto_esame.controllo_anno_insegnamento() OWNER TO progetto;
 
 --
--- TOC entry 262 (class 1255 OID 16822)
+-- TOC entry 263 (class 1255 OID 16822)
 -- Name: controllo_numero_insegnamenti_docente(); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -131,7 +131,7 @@ $$;
 ALTER FUNCTION progetto_esame.controllo_numero_insegnamenti_docente() OWNER TO progetto;
 
 --
--- TOC entry 243 (class 1255 OID 16713)
+-- TOC entry 244 (class 1255 OID 16713)
 -- Name: controllo_propedeuticità_iscrizione_appello(); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -176,7 +176,7 @@ $$;
 ALTER FUNCTION progetto_esame."controllo_propedeuticità_iscrizione_appello"() OWNER TO progetto;
 
 --
--- TOC entry 263 (class 1255 OID 16826)
+-- TOC entry 264 (class 1255 OID 16826)
 -- Name: delete_docente(character varying, character varying[], character varying[], character varying[]); Type: PROCEDURE; Schema: progetto_esame; Owner: progetto
 --
 
@@ -220,7 +220,7 @@ $$;
 ALTER PROCEDURE progetto_esame.delete_docente(IN doc character varying, IN cl_arr character varying[], IN ins_arr character varying[], IN doc_arr character varying[]) OWNER TO progetto;
 
 --
--- TOC entry 260 (class 1255 OID 16736)
+-- TOC entry 261 (class 1255 OID 16736)
 -- Name: get_appelli_studente_non_iscritto_futuri(integer); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -275,7 +275,7 @@ CREATE TABLE progetto_esame.insegnamenti (
 ALTER TABLE progetto_esame.insegnamenti OWNER TO progetto;
 
 --
--- TOC entry 250 (class 1255 OID 16749)
+-- TOC entry 251 (class 1255 OID 16749)
 -- Name: get_insegnamenti_a_cui_propedeutico(character varying, character varying); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -298,7 +298,7 @@ $$;
 ALTER FUNCTION progetto_esame.get_insegnamenti_a_cui_propedeutico(cl character varying, ci character varying) OWNER TO progetto;
 
 --
--- TOC entry 255 (class 1255 OID 16747)
+-- TOC entry 256 (class 1255 OID 16747)
 -- Name: get_insegnamenti_aggiungibili_come_propedeutici(character varying, character varying); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -333,7 +333,7 @@ $$;
 ALTER FUNCTION progetto_esame.get_insegnamenti_aggiungibili_come_propedeutici(cl character varying, ci character varying) OWNER TO progetto;
 
 --
--- TOC entry 251 (class 1255 OID 16748)
+-- TOC entry 252 (class 1255 OID 16748)
 -- Name: get_insegnamenti_propedeutici(character varying, character varying); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -358,7 +358,7 @@ $$;
 ALTER FUNCTION progetto_esame.get_insegnamenti_propedeutici(cl character varying, ci character varying) OWNER TO progetto;
 
 --
--- TOC entry 249 (class 1255 OID 16732)
+-- TOC entry 250 (class 1255 OID 16732)
 -- Name: get_iscrizioni_appello(integer); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -382,7 +382,7 @@ $$;
 ALTER FUNCTION progetto_esame.get_iscrizioni_appello(id_appello integer) OWNER TO progetto;
 
 --
--- TOC entry 256 (class 1255 OID 16733)
+-- TOC entry 257 (class 1255 OID 16733)
 -- Name: get_iscrizioni_attive_appelli_studente(integer); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -408,7 +408,7 @@ $$;
 ALTER FUNCTION progetto_esame.get_iscrizioni_attive_appelli_studente(s integer) OWNER TO progetto;
 
 --
--- TOC entry 253 (class 1255 OID 16707)
+-- TOC entry 254 (class 1255 OID 16707)
 -- Name: previeni_appelli_per_insegnamenti_stesso_anno(); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -442,7 +442,7 @@ $$;
 ALTER FUNCTION progetto_esame.previeni_appelli_per_insegnamenti_stesso_anno() OWNER TO progetto;
 
 --
--- TOC entry 259 (class 1255 OID 16820)
+-- TOC entry 260 (class 1255 OID 16820)
 -- Name: previeni_eliminazione_appello_passato(); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -475,7 +475,7 @@ $$;
 ALTER FUNCTION progetto_esame.previeni_eliminazione_appello_passato() OWNER TO progetto;
 
 --
--- TOC entry 230 (class 1255 OID 16687)
+-- TOC entry 231 (class 1255 OID 16687)
 -- Name: previeni_inserimento_propedeuticità_cdl_differenti(); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -495,7 +495,7 @@ $$;
 ALTER FUNCTION progetto_esame."previeni_inserimento_propedeuticità_cdl_differenti"() OWNER TO progetto;
 
 --
--- TOC entry 254 (class 1255 OID 16695)
+-- TOC entry 255 (class 1255 OID 16695)
 -- Name: previeni_inserimento_propedeuticità_medesimo_insegnamento(); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -515,7 +515,7 @@ $$;
 ALTER FUNCTION progetto_esame."previeni_inserimento_propedeuticità_medesimo_insegnamento"() OWNER TO progetto;
 
 --
--- TOC entry 258 (class 1255 OID 16806)
+-- TOC entry 259 (class 1255 OID 16806)
 -- Name: previeni_inserimento_propedeuticità_transitive_loop(); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -558,7 +558,7 @@ $$;
 ALTER FUNCTION progetto_esame."previeni_inserimento_propedeuticità_transitive_loop"() OWNER TO progetto;
 
 --
--- TOC entry 231 (class 1255 OID 16756)
+-- TOC entry 232 (class 1255 OID 16756)
 -- Name: previeni_iscrizione_appello_data_passata(); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -584,7 +584,7 @@ $$;
 ALTER FUNCTION progetto_esame.previeni_iscrizione_appello_data_passata() OWNER TO progetto;
 
 --
--- TOC entry 244 (class 1255 OID 16758)
+-- TOC entry 245 (class 1255 OID 16758)
 -- Name: previeni_iscrizione_appello_insegnamento_non_in_cdl(); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -618,7 +618,7 @@ $$;
 ALTER FUNCTION progetto_esame.previeni_iscrizione_appello_insegnamento_non_in_cdl() OWNER TO progetto;
 
 --
--- TOC entry 264 (class 1255 OID 16852)
+-- TOC entry 265 (class 1255 OID 16852)
 -- Name: previeni_modifica_tipo_corso_laurea_insegnamenti_discordi(); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -647,7 +647,7 @@ $$;
 ALTER FUNCTION progetto_esame.previeni_modifica_tipo_corso_laurea_insegnamenti_discordi() OWNER TO progetto;
 
 --
--- TOC entry 248 (class 1255 OID 16722)
+-- TOC entry 249 (class 1255 OID 16722)
 -- Name: produci_carriera_completa_studente(integer); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -673,7 +673,7 @@ $$;
 ALTER FUNCTION progetto_esame.produci_carriera_completa_studente(s integer) OWNER TO progetto;
 
 --
--- TOC entry 246 (class 1255 OID 16803)
+-- TOC entry 247 (class 1255 OID 16803)
 -- Name: produci_carriera_completa_studente_storico(integer); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -699,7 +699,7 @@ $$;
 ALTER FUNCTION progetto_esame.produci_carriera_completa_studente_storico(s integer) OWNER TO progetto;
 
 --
--- TOC entry 257 (class 1255 OID 16745)
+-- TOC entry 258 (class 1255 OID 16745)
 -- Name: produci_carriera_valida_studente(integer); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -743,7 +743,7 @@ $$;
 ALTER FUNCTION progetto_esame.produci_carriera_valida_studente(s integer) OWNER TO progetto;
 
 --
--- TOC entry 261 (class 1255 OID 16804)
+-- TOC entry 262 (class 1255 OID 16804)
 -- Name: produci_carriera_valida_studente_storico(integer); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -767,7 +767,7 @@ begin
 			return query (with appelli_sostenuti as (
 				select *
 				from appelli a 
-				inner join esami e on e.appello = a.id 
+				inner join storico_esami e on e.appello = a.id 
 				where e.studente = s 
 					and a.insegnamento = insegnamento.codice
 					and a.corso_laurea = insegnamento.corso_laurea
@@ -787,7 +787,7 @@ $$;
 ALTER FUNCTION progetto_esame.produci_carriera_valida_studente_storico(s integer) OWNER TO progetto;
 
 --
--- TOC entry 247 (class 1255 OID 16724)
+-- TOC entry 248 (class 1255 OID 16724)
 -- Name: produci_informazioni_corso_laurea(character varying); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -812,7 +812,7 @@ $$;
 ALTER FUNCTION progetto_esame.produci_informazioni_corso_laurea(cdl character varying) OWNER TO progetto;
 
 --
--- TOC entry 245 (class 1255 OID 16801)
+-- TOC entry 246 (class 1255 OID 16801)
 -- Name: salvataggio_studente_in_storico(); Type: FUNCTION; Schema: progetto_esame; Owner: progetto
 --
 
@@ -872,7 +872,7 @@ CREATE SEQUENCE progetto_esame.appelli_id_seq
 ALTER TABLE progetto_esame.appelli_id_seq OWNER TO progetto;
 
 --
--- TOC entry 3483 (class 0 OID 0)
+-- TOC entry 3488 (class 0 OID 0)
 -- Dependencies: 220
 -- Name: appelli_id_seq; Type: SEQUENCE OWNED BY; Schema: progetto_esame; Owner: progetto
 --
@@ -940,7 +940,7 @@ CREATE SEQUENCE progetto_esame.esame_appello_seq
 ALTER TABLE progetto_esame.esame_appello_seq OWNER TO progetto;
 
 --
--- TOC entry 3494 (class 0 OID 0)
+-- TOC entry 3499 (class 0 OID 0)
 -- Dependencies: 225
 -- Name: esame_appello_seq; Type: SEQUENCE OWNED BY; Schema: progetto_esame; Owner: progetto
 --
@@ -965,7 +965,7 @@ CREATE SEQUENCE progetto_esame.esame_studente_seq
 ALTER TABLE progetto_esame.esame_studente_seq OWNER TO progetto;
 
 --
--- TOC entry 3495 (class 0 OID 0)
+-- TOC entry 3500 (class 0 OID 0)
 -- Dependencies: 224
 -- Name: esame_studente_seq; Type: SEQUENCE OWNED BY; Schema: progetto_esame; Owner: progetto
 --
@@ -974,18 +974,44 @@ ALTER SEQUENCE progetto_esame.esame_studente_seq OWNED BY progetto_esame.esami.s
 
 
 --
--- TOC entry 227 (class 1259 OID 16750)
+-- TOC entry 230 (class 1259 OID 16868)
+-- Name: informazioni_complete_appelli; Type: VIEW; Schema: progetto_esame; Owner: progetto
+--
+
+CREATE VIEW progetto_esame.informazioni_complete_appelli AS
+ SELECT a.id,
+    a.data,
+    a.corso_laurea AS codice_corso_laurea,
+    cl.nome AS nome_corso_laurea,
+    cl.tipo AS tipo_corso_laurea,
+    a.insegnamento AS codice_insegnamento,
+    i.nome AS nome_insegnamento,
+    i.descrizione AS descrizione_insegnamento,
+    i.anno AS anno_insegnamento,
+    d.email AS email_docente,
+    d.nome AS nome_docente,
+    d.cognome AS cognome_docente
+   FROM (((progetto_esame.appelli a
+     JOIN progetto_esame.insegnamenti i ON ((((i.codice)::text = (a.insegnamento)::text) AND ((i.corso_laurea)::text = (a.corso_laurea)::text))))
+     JOIN progetto_esame.corsi_laurea cl ON (((cl.codice)::text = (a.corso_laurea)::text)))
+     JOIN progetto_esame.docenti d ON (((d.email)::text = (i.docente)::text)));
+
+
+ALTER TABLE progetto_esame.informazioni_complete_appelli OWNER TO progetto;
+
+--
+-- TOC entry 229 (class 1259 OID 16858)
 -- Name: informazioni_complete_insegnamenti; Type: VIEW; Schema: progetto_esame; Owner: progetto
 --
 
 CREATE VIEW progetto_esame.informazioni_complete_insegnamenti AS
  SELECT i.corso_laurea,
+    cl.nome AS nome_corso_laurea,
+    cl.tipo AS tipo_corso_laurea,
     i.nome,
     i.descrizione,
     i.codice,
     i.anno,
-    cl.nome AS nome_corso_laurea,
-    cl.tipo AS tipo_corso_laurea,
     d.nome AS nome_docente,
     d.email AS email_docente,
     d.cognome AS cognome_docente
@@ -1025,7 +1051,7 @@ CREATE TABLE progetto_esame.segreteria (
 ALTER TABLE progetto_esame.segreteria OWNER TO progetto;
 
 --
--- TOC entry 229 (class 1259 OID 16784)
+-- TOC entry 228 (class 1259 OID 16784)
 -- Name: storico_esami; Type: TABLE; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1039,7 +1065,7 @@ CREATE TABLE progetto_esame.storico_esami (
 ALTER TABLE progetto_esame.storico_esami OWNER TO progetto;
 
 --
--- TOC entry 228 (class 1259 OID 16765)
+-- TOC entry 227 (class 1259 OID 16765)
 -- Name: storico_studenti; Type: TABLE; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1088,7 +1114,7 @@ CREATE SEQUENCE progetto_esame.studenti_matricola_seq
 ALTER TABLE progetto_esame.studenti_matricola_seq OWNER TO progetto;
 
 --
--- TOC entry 3509 (class 0 OID 0)
+-- TOC entry 3515 (class 0 OID 0)
 -- Dependencies: 222
 -- Name: studenti_matricola_seq; Type: SEQUENCE OWNED BY; Schema: progetto_esame; Owner: progetto
 --
@@ -1097,7 +1123,7 @@ ALTER SEQUENCE progetto_esame.studenti_matricola_seq OWNED BY progetto_esame.stu
 
 
 --
--- TOC entry 3256 (class 2604 OID 16612)
+-- TOC entry 3260 (class 2604 OID 16612)
 -- Name: appelli id; Type: DEFAULT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1105,7 +1131,7 @@ ALTER TABLE ONLY progetto_esame.appelli ALTER COLUMN id SET DEFAULT nextval('pro
 
 
 --
--- TOC entry 3258 (class 2604 OID 16673)
+-- TOC entry 3262 (class 2604 OID 16673)
 -- Name: esami studente; Type: DEFAULT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1113,7 +1139,7 @@ ALTER TABLE ONLY progetto_esame.esami ALTER COLUMN studente SET DEFAULT nextval(
 
 
 --
--- TOC entry 3259 (class 2604 OID 16674)
+-- TOC entry 3263 (class 2604 OID 16674)
 -- Name: esami appello; Type: DEFAULT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1121,7 +1147,7 @@ ALTER TABLE ONLY progetto_esame.esami ALTER COLUMN appello SET DEFAULT nextval('
 
 
 --
--- TOC entry 3257 (class 2604 OID 16649)
+-- TOC entry 3261 (class 2604 OID 16649)
 -- Name: studenti matricola; Type: DEFAULT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1129,7 +1155,7 @@ ALTER TABLE ONLY progetto_esame.studenti ALTER COLUMN matricola SET DEFAULT next
 
 
 --
--- TOC entry 3455 (class 0 OID 16609)
+-- TOC entry 3460 (class 0 OID 16609)
 -- Dependencies: 221
 -- Data for Name: appelli; Type: TABLE DATA; Schema: progetto_esame; Owner: progetto
 --
@@ -1219,7 +1245,7 @@ COPY progetto_esame.appelli (id, insegnamento, corso_laurea, data) FROM stdin;
 
 
 --
--- TOC entry 3451 (class 0 OID 16406)
+-- TOC entry 3456 (class 0 OID 16406)
 -- Dependencies: 217
 -- Data for Name: corsi_laurea; Type: TABLE DATA; Schema: progetto_esame; Owner: progetto
 --
@@ -1233,7 +1259,7 @@ L-01	Beni Culturali	T
 
 
 --
--- TOC entry 3450 (class 0 OID 16396)
+-- TOC entry 3455 (class 0 OID 16396)
 -- Dependencies: 216
 -- Data for Name: docenti; Type: TABLE DATA; Schema: progetto_esame; Owner: progetto
 --
@@ -1252,7 +1278,7 @@ matteo.paolillo@uniesempio.it	Matteo	Paolillo	matteo.paolillo
 
 
 --
--- TOC entry 3460 (class 0 OID 16670)
+-- TOC entry 3465 (class 0 OID 16670)
 -- Dependencies: 226
 -- Data for Name: esami; Type: TABLE DATA; Schema: progetto_esame; Owner: progetto
 --
@@ -1264,14 +1290,14 @@ COPY progetto_esame.esami (studente, appello, valutazione) FROM stdin;
 10	98	12
 10	108	\N
 10	100	\N
-10	86	24
 11	93	\N
 11	91	\N
+10	86	25
 \.
 
 
 --
--- TOC entry 3452 (class 0 OID 16513)
+-- TOC entry 3457 (class 0 OID 16513)
 -- Dependencies: 218
 -- Data for Name: insegnamenti; Type: TABLE DATA; Schema: progetto_esame; Owner: progetto
 --
@@ -1301,7 +1327,7 @@ FCM	LM-6	Fisiologia Cellulare e Molecolare	L'obiettivo dell'insegnamento è quel
 
 
 --
--- TOC entry 3453 (class 0 OID 16564)
+-- TOC entry 3458 (class 0 OID 16564)
 -- Dependencies: 219
 -- Data for Name: propedeuticità; Type: TABLE DATA; Schema: progetto_esame; Owner: progetto
 --
@@ -1315,7 +1341,7 @@ LI	L-01	SAC	L-01
 
 
 --
--- TOC entry 3449 (class 0 OID 16391)
+-- TOC entry 3454 (class 0 OID 16391)
 -- Dependencies: 215
 -- Data for Name: segreteria; Type: TABLE DATA; Schema: progetto_esame; Owner: progetto
 --
@@ -1328,33 +1354,40 @@ segreteria3@uniesempio.it	segreteria3
 
 
 --
--- TOC entry 3462 (class 0 OID 16784)
--- Dependencies: 229
+-- TOC entry 3467 (class 0 OID 16784)
+-- Dependencies: 228
 -- Data for Name: storico_esami; Type: TABLE DATA; Schema: progetto_esame; Owner: progetto
 --
 
 COPY progetto_esame.storico_esami (studente, appello, valutazione) FROM stdin;
+12	109	12
+12	110	18
+12	113	27
+12	122	29
+12	131	30
+12	127	19
+12	119	22
 \.
 
 
 --
--- TOC entry 3461 (class 0 OID 16765)
--- Dependencies: 228
+-- TOC entry 3466 (class 0 OID 16765)
+-- Dependencies: 227
 -- Data for Name: storico_studenti; Type: TABLE DATA; Schema: progetto_esame; Owner: progetto
 --
 
 COPY progetto_esame.storico_studenti (matricola, email, nome, cognome, corso_laurea) FROM stdin;
+12	andrea.ippolito@uniesempio.it	Andrea	Ippolito	L-02
 \.
 
 
 --
--- TOC entry 3457 (class 0 OID 16646)
+-- TOC entry 3462 (class 0 OID 16646)
 -- Dependencies: 223
 -- Data for Name: studenti; Type: TABLE DATA; Schema: progetto_esame; Owner: progetto
 --
 
 COPY progetto_esame.studenti (matricola, email, nome, cognome, password, corso_laurea) FROM stdin;
-12	andrea.ippolito@uniesempio.it	Andrea	Ippolito	andrea.ippolito	L-02
 13	marina.huang@uniesempio.it	Marina	Huang	marina.huang	L-02
 14	ermenegildo.patriarca@uniesempio.it	Ermenegildo	Patriarca	ermenegildo.patriarca	LM-6
 15	lucia.crispaldini@uniesempio.it	Lucia	Crispaldini	lucia.crispaldini	LM-6
@@ -1366,7 +1399,7 @@ COPY progetto_esame.studenti (matricola, email, nome, cognome, password, corso_l
 
 
 --
--- TOC entry 3511 (class 0 OID 0)
+-- TOC entry 3517 (class 0 OID 0)
 -- Dependencies: 220
 -- Name: appelli_id_seq; Type: SEQUENCE SET; Schema: progetto_esame; Owner: progetto
 --
@@ -1375,7 +1408,7 @@ SELECT pg_catalog.setval('progetto_esame.appelli_id_seq', 165, true);
 
 
 --
--- TOC entry 3512 (class 0 OID 0)
+-- TOC entry 3518 (class 0 OID 0)
 -- Dependencies: 225
 -- Name: esame_appello_seq; Type: SEQUENCE SET; Schema: progetto_esame; Owner: progetto
 --
@@ -1384,7 +1417,7 @@ SELECT pg_catalog.setval('progetto_esame.esame_appello_seq', 1, false);
 
 
 --
--- TOC entry 3513 (class 0 OID 0)
+-- TOC entry 3519 (class 0 OID 0)
 -- Dependencies: 224
 -- Name: esame_studente_seq; Type: SEQUENCE SET; Schema: progetto_esame; Owner: progetto
 --
@@ -1393,7 +1426,7 @@ SELECT pg_catalog.setval('progetto_esame.esame_studente_seq', 1, false);
 
 
 --
--- TOC entry 3514 (class 0 OID 0)
+-- TOC entry 3520 (class 0 OID 0)
 -- Dependencies: 222
 -- Name: studenti_matricola_seq; Type: SEQUENCE SET; Schema: progetto_esame; Owner: progetto
 --
@@ -1402,7 +1435,7 @@ SELECT pg_catalog.setval('progetto_esame.studenti_matricola_seq', 20, true);
 
 
 --
--- TOC entry 3271 (class 2606 OID 16614)
+-- TOC entry 3275 (class 2606 OID 16614)
 -- Name: appelli appelli_pkey; Type: CONSTRAINT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1411,7 +1444,7 @@ ALTER TABLE ONLY progetto_esame.appelli
 
 
 --
--- TOC entry 3265 (class 2606 OID 16412)
+-- TOC entry 3269 (class 2606 OID 16412)
 -- Name: corsi_laurea corsi_laurea_pkey; Type: CONSTRAINT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1420,7 +1453,7 @@ ALTER TABLE ONLY progetto_esame.corsi_laurea
 
 
 --
--- TOC entry 3263 (class 2606 OID 16402)
+-- TOC entry 3267 (class 2606 OID 16402)
 -- Name: docenti docenti_pkey; Type: CONSTRAINT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1429,7 +1462,7 @@ ALTER TABLE ONLY progetto_esame.docenti
 
 
 --
--- TOC entry 3278 (class 2606 OID 16676)
+-- TOC entry 3282 (class 2606 OID 16676)
 -- Name: esami esame_pkey; Type: CONSTRAINT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1438,7 +1471,7 @@ ALTER TABLE ONLY progetto_esame.esami
 
 
 --
--- TOC entry 3267 (class 2606 OID 16519)
+-- TOC entry 3271 (class 2606 OID 16519)
 -- Name: insegnamenti insegnamenti_pkey; Type: CONSTRAINT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1447,7 +1480,7 @@ ALTER TABLE ONLY progetto_esame.insegnamenti
 
 
 --
--- TOC entry 3269 (class 2606 OID 16568)
+-- TOC entry 3273 (class 2606 OID 16568)
 -- Name: propedeuticità propedeuticità_pkey; Type: CONSTRAINT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1456,7 +1489,7 @@ ALTER TABLE ONLY progetto_esame."propedeuticità"
 
 
 --
--- TOC entry 3261 (class 2606 OID 16395)
+-- TOC entry 3265 (class 2606 OID 16395)
 -- Name: segreteria segreteria_pkey; Type: CONSTRAINT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1465,7 +1498,7 @@ ALTER TABLE ONLY progetto_esame.segreteria
 
 
 --
--- TOC entry 3282 (class 2606 OID 16788)
+-- TOC entry 3286 (class 2606 OID 16788)
 -- Name: storico_esami storico_esami_pkey; Type: CONSTRAINT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1474,7 +1507,7 @@ ALTER TABLE ONLY progetto_esame.storico_esami
 
 
 --
--- TOC entry 3280 (class 2606 OID 16771)
+-- TOC entry 3284 (class 2606 OID 16771)
 -- Name: storico_studenti storico_studenti_pkey; Type: CONSTRAINT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1483,7 +1516,7 @@ ALTER TABLE ONLY progetto_esame.storico_studenti
 
 
 --
--- TOC entry 3274 (class 2606 OID 16655)
+-- TOC entry 3278 (class 2606 OID 16655)
 -- Name: studenti studenti_email_key; Type: CONSTRAINT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1492,7 +1525,7 @@ ALTER TABLE ONLY progetto_esame.studenti
 
 
 --
--- TOC entry 3276 (class 2606 OID 16653)
+-- TOC entry 3280 (class 2606 OID 16653)
 -- Name: studenti studenti_pkey; Type: CONSTRAINT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1501,7 +1534,7 @@ ALTER TABLE ONLY progetto_esame.studenti
 
 
 --
--- TOC entry 3272 (class 1259 OID 16620)
+-- TOC entry 3276 (class 1259 OID 16620)
 -- Name: idx_appelli; Type: INDEX; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1509,7 +1542,7 @@ CREATE UNIQUE INDEX idx_appelli ON progetto_esame.appelli USING btree (insegname
 
 
 --
--- TOC entry 3295 (class 2620 OID 16706)
+-- TOC entry 3299 (class 2620 OID 16706)
 -- Name: insegnamenti controllo_anno_insegnamento; Type: TRIGGER; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1517,7 +1550,7 @@ CREATE TRIGGER controllo_anno_insegnamento BEFORE INSERT OR UPDATE ON progetto_e
 
 
 --
--- TOC entry 3296 (class 2620 OID 16823)
+-- TOC entry 3300 (class 2620 OID 16823)
 -- Name: insegnamenti controllo_numero_insegnamenti_docente; Type: TRIGGER; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1525,7 +1558,7 @@ CREATE TRIGGER controllo_numero_insegnamenti_docente BEFORE INSERT OR UPDATE ON 
 
 
 --
--- TOC entry 3303 (class 2620 OID 16812)
+-- TOC entry 3307 (class 2620 OID 16812)
 -- Name: esami controllo_propedeuticità_iscrizione_appello; Type: TRIGGER; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1533,7 +1566,7 @@ CREATE TRIGGER "controllo_propedeuticità_iscrizione_appello" BEFORE INSERT ON p
 
 
 --
--- TOC entry 3300 (class 2620 OID 16755)
+-- TOC entry 3304 (class 2620 OID 16755)
 -- Name: appelli previeni_appelli_per_insegnamenti_stesso_anno; Type: TRIGGER; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1541,7 +1574,7 @@ CREATE TRIGGER previeni_appelli_per_insegnamenti_stesso_anno BEFORE INSERT OR UP
 
 
 --
--- TOC entry 3301 (class 2620 OID 16821)
+-- TOC entry 3305 (class 2620 OID 16821)
 -- Name: appelli previeni_eliminazione_appello_passato; Type: TRIGGER; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1549,7 +1582,7 @@ CREATE TRIGGER previeni_eliminazione_appello_passato BEFORE DELETE ON progetto_e
 
 
 --
--- TOC entry 3297 (class 2620 OID 16688)
+-- TOC entry 3301 (class 2620 OID 16688)
 -- Name: propedeuticità previeni_inserimento_propedeuticità_cdl_differenti; Type: TRIGGER; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1557,7 +1590,7 @@ CREATE TRIGGER "previeni_inserimento_propedeuticità_cdl_differenti" BEFORE INSE
 
 
 --
--- TOC entry 3298 (class 2620 OID 16696)
+-- TOC entry 3302 (class 2620 OID 16696)
 -- Name: propedeuticità previeni_inserimento_propedeuticità_medesimo_insegnamento; Type: TRIGGER; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1565,7 +1598,7 @@ CREATE TRIGGER "previeni_inserimento_propedeuticità_medesimo_insegnamento" BEFO
 
 
 --
--- TOC entry 3299 (class 2620 OID 16807)
+-- TOC entry 3303 (class 2620 OID 16807)
 -- Name: propedeuticità previeni_inserimento_propedeuticità_transitive_loop; Type: TRIGGER; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1573,7 +1606,7 @@ CREATE TRIGGER "previeni_inserimento_propedeuticità_transitive_loop" BEFORE INS
 
 
 --
--- TOC entry 3304 (class 2620 OID 16813)
+-- TOC entry 3308 (class 2620 OID 16813)
 -- Name: esami previeni_iscrizione_appello_data_passata; Type: TRIGGER; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1581,7 +1614,7 @@ CREATE TRIGGER previeni_iscrizione_appello_data_passata BEFORE INSERT ON progett
 
 
 --
--- TOC entry 3305 (class 2620 OID 16814)
+-- TOC entry 3309 (class 2620 OID 16814)
 -- Name: esami previeni_iscrizione_appello_insegnamento_non_in_cdl; Type: TRIGGER; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1589,7 +1622,7 @@ CREATE TRIGGER previeni_iscrizione_appello_insegnamento_non_in_cdl BEFORE INSERT
 
 
 --
--- TOC entry 3294 (class 2620 OID 16853)
+-- TOC entry 3298 (class 2620 OID 16853)
 -- Name: corsi_laurea previeni_modifica_tipo_corso_laurea_insegnamenti_discordi; Type: TRIGGER; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1597,7 +1630,7 @@ CREATE TRIGGER previeni_modifica_tipo_corso_laurea_insegnamenti_discordi BEFORE 
 
 
 --
--- TOC entry 3302 (class 2620 OID 16802)
+-- TOC entry 3306 (class 2620 OID 16802)
 -- Name: studenti salvataggio_studente_in_storico; Type: TRIGGER; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1605,7 +1638,7 @@ CREATE TRIGGER salvataggio_studente_in_storico BEFORE DELETE ON progetto_esame.s
 
 
 --
--- TOC entry 3287 (class 2606 OID 16615)
+-- TOC entry 3291 (class 2606 OID 16615)
 -- Name: appelli appelli_insegnamento; Type: FK CONSTRAINT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1614,7 +1647,7 @@ ALTER TABLE ONLY progetto_esame.appelli
 
 
 --
--- TOC entry 3289 (class 2606 OID 16682)
+-- TOC entry 3293 (class 2606 OID 16682)
 -- Name: esami fk_esame_appello; Type: FK CONSTRAINT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1623,7 +1656,7 @@ ALTER TABLE ONLY progetto_esame.esami
 
 
 --
--- TOC entry 3290 (class 2606 OID 16677)
+-- TOC entry 3294 (class 2606 OID 16677)
 -- Name: esami fk_esame_studente; Type: FK CONSTRAINT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1632,7 +1665,7 @@ ALTER TABLE ONLY progetto_esame.esami
 
 
 --
--- TOC entry 3283 (class 2606 OID 16520)
+-- TOC entry 3287 (class 2606 OID 16520)
 -- Name: insegnamenti fk_insegnamenti_corso_laurea; Type: FK CONSTRAINT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1641,7 +1674,7 @@ ALTER TABLE ONLY progetto_esame.insegnamenti
 
 
 --
--- TOC entry 3284 (class 2606 OID 16525)
+-- TOC entry 3288 (class 2606 OID 16525)
 -- Name: insegnamenti fk_insegnamenti_docente; Type: FK CONSTRAINT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1650,7 +1683,7 @@ ALTER TABLE ONLY progetto_esame.insegnamenti
 
 
 --
--- TOC entry 3285 (class 2606 OID 16569)
+-- TOC entry 3289 (class 2606 OID 16569)
 -- Name: propedeuticità fk_propedeuticità_insegnamento_propedeuticità; Type: FK CONSTRAINT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1659,7 +1692,7 @@ ALTER TABLE ONLY progetto_esame."propedeuticità"
 
 
 --
--- TOC entry 3286 (class 2606 OID 16574)
+-- TOC entry 3290 (class 2606 OID 16574)
 -- Name: propedeuticità fk_propedeuticità_insegnamento_propedeutico; Type: FK CONSTRAINT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1668,7 +1701,7 @@ ALTER TABLE ONLY progetto_esame."propedeuticità"
 
 
 --
--- TOC entry 3292 (class 2606 OID 16789)
+-- TOC entry 3296 (class 2606 OID 16789)
 -- Name: storico_esami fk_storico_esami_appello; Type: FK CONSTRAINT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1677,7 +1710,7 @@ ALTER TABLE ONLY progetto_esame.storico_esami
 
 
 --
--- TOC entry 3293 (class 2606 OID 16794)
+-- TOC entry 3297 (class 2606 OID 16794)
 -- Name: storico_esami fk_storico_esami_studente; Type: FK CONSTRAINT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1686,7 +1719,7 @@ ALTER TABLE ONLY progetto_esame.storico_esami
 
 
 --
--- TOC entry 3291 (class 2606 OID 16827)
+-- TOC entry 3295 (class 2606 OID 16827)
 -- Name: storico_studenti fk_storico_studenti_corso_laurea; Type: FK CONSTRAINT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1695,7 +1728,7 @@ ALTER TABLE ONLY progetto_esame.storico_studenti
 
 
 --
--- TOC entry 3288 (class 2606 OID 16832)
+-- TOC entry 3292 (class 2606 OID 16832)
 -- Name: studenti fk_studenti_corso_laurea; Type: FK CONSTRAINT; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1704,7 +1737,7 @@ ALTER TABLE ONLY progetto_esame.studenti
 
 
 --
--- TOC entry 3468 (class 0 OID 0)
+-- TOC entry 3473 (class 0 OID 0)
 -- Dependencies: 6
 -- Name: SCHEMA progetto_esame; Type: ACL; Schema: -; Owner: progetto
 --
@@ -1715,8 +1748,8 @@ GRANT USAGE ON SCHEMA progetto_esame TO segreteria;
 
 
 --
--- TOC entry 3469 (class 0 OID 0)
--- Dependencies: 263
+-- TOC entry 3474 (class 0 OID 0)
+-- Dependencies: 264
 -- Name: PROCEDURE delete_docente(IN doc character varying, IN cl_arr character varying[], IN ins_arr character varying[], IN doc_arr character varying[]); Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1724,8 +1757,8 @@ GRANT ALL ON PROCEDURE progetto_esame.delete_docente(IN doc character varying, I
 
 
 --
--- TOC entry 3470 (class 0 OID 0)
--- Dependencies: 260
+-- TOC entry 3475 (class 0 OID 0)
+-- Dependencies: 261
 -- Name: FUNCTION get_appelli_studente_non_iscritto_futuri(s integer); Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1733,7 +1766,7 @@ GRANT ALL ON FUNCTION progetto_esame.get_appelli_studente_non_iscritto_futuri(s 
 
 
 --
--- TOC entry 3471 (class 0 OID 0)
+-- TOC entry 3476 (class 0 OID 0)
 -- Dependencies: 218
 -- Name: TABLE insegnamenti; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
@@ -1744,8 +1777,8 @@ GRANT SELECT,INSERT,UPDATE ON TABLE progetto_esame.insegnamenti TO segreteria;
 
 
 --
--- TOC entry 3472 (class 0 OID 0)
--- Dependencies: 250
+-- TOC entry 3477 (class 0 OID 0)
+-- Dependencies: 251
 -- Name: FUNCTION get_insegnamenti_a_cui_propedeutico(cl character varying, ci character varying); Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1753,8 +1786,8 @@ GRANT ALL ON FUNCTION progetto_esame.get_insegnamenti_a_cui_propedeutico(cl char
 
 
 --
--- TOC entry 3473 (class 0 OID 0)
--- Dependencies: 255
+-- TOC entry 3478 (class 0 OID 0)
+-- Dependencies: 256
 -- Name: FUNCTION get_insegnamenti_aggiungibili_come_propedeutici(cl character varying, ci character varying); Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1762,8 +1795,8 @@ GRANT ALL ON FUNCTION progetto_esame.get_insegnamenti_aggiungibili_come_propedeu
 
 
 --
--- TOC entry 3474 (class 0 OID 0)
--- Dependencies: 251
+-- TOC entry 3479 (class 0 OID 0)
+-- Dependencies: 252
 -- Name: FUNCTION get_insegnamenti_propedeutici(cl character varying, ci character varying); Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1771,8 +1804,8 @@ GRANT ALL ON FUNCTION progetto_esame.get_insegnamenti_propedeutici(cl character 
 
 
 --
--- TOC entry 3475 (class 0 OID 0)
--- Dependencies: 249
+-- TOC entry 3480 (class 0 OID 0)
+-- Dependencies: 250
 -- Name: FUNCTION get_iscrizioni_appello(id_appello integer); Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1780,8 +1813,8 @@ GRANT ALL ON FUNCTION progetto_esame.get_iscrizioni_appello(id_appello integer) 
 
 
 --
--- TOC entry 3476 (class 0 OID 0)
--- Dependencies: 256
+-- TOC entry 3481 (class 0 OID 0)
+-- Dependencies: 257
 -- Name: FUNCTION get_iscrizioni_attive_appelli_studente(s integer); Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1789,8 +1822,8 @@ GRANT ALL ON FUNCTION progetto_esame.get_iscrizioni_attive_appelli_studente(s in
 
 
 --
--- TOC entry 3477 (class 0 OID 0)
--- Dependencies: 248
+-- TOC entry 3482 (class 0 OID 0)
+-- Dependencies: 249
 -- Name: FUNCTION produci_carriera_completa_studente(s integer); Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1799,8 +1832,8 @@ GRANT ALL ON FUNCTION progetto_esame.produci_carriera_completa_studente(s intege
 
 
 --
--- TOC entry 3478 (class 0 OID 0)
--- Dependencies: 246
+-- TOC entry 3483 (class 0 OID 0)
+-- Dependencies: 247
 -- Name: FUNCTION produci_carriera_completa_studente_storico(s integer); Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1809,8 +1842,8 @@ GRANT ALL ON FUNCTION progetto_esame.produci_carriera_completa_studente_storico(
 
 
 --
--- TOC entry 3479 (class 0 OID 0)
--- Dependencies: 257
+-- TOC entry 3484 (class 0 OID 0)
+-- Dependencies: 258
 -- Name: FUNCTION produci_carriera_valida_studente(s integer); Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1819,8 +1852,8 @@ GRANT ALL ON FUNCTION progetto_esame.produci_carriera_valida_studente(s integer)
 
 
 --
--- TOC entry 3480 (class 0 OID 0)
--- Dependencies: 261
+-- TOC entry 3485 (class 0 OID 0)
+-- Dependencies: 262
 -- Name: FUNCTION produci_carriera_valida_studente_storico(s integer); Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1829,8 +1862,8 @@ GRANT ALL ON FUNCTION progetto_esame.produci_carriera_valida_studente_storico(s 
 
 
 --
--- TOC entry 3481 (class 0 OID 0)
--- Dependencies: 247
+-- TOC entry 3486 (class 0 OID 0)
+-- Dependencies: 248
 -- Name: FUNCTION produci_informazioni_corso_laurea(cdl character varying); Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1839,7 +1872,7 @@ GRANT ALL ON FUNCTION progetto_esame.produci_informazioni_corso_laurea(cdl chara
 
 
 --
--- TOC entry 3482 (class 0 OID 0)
+-- TOC entry 3487 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: TABLE appelli; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
@@ -1850,7 +1883,7 @@ GRANT SELECT ON TABLE progetto_esame.appelli TO segreteria;
 
 
 --
--- TOC entry 3484 (class 0 OID 0)
+-- TOC entry 3489 (class 0 OID 0)
 -- Dependencies: 220
 -- Name: SEQUENCE appelli_id_seq; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
@@ -1859,7 +1892,7 @@ GRANT SELECT,USAGE ON SEQUENCE progetto_esame.appelli_id_seq TO docente;
 
 
 --
--- TOC entry 3485 (class 0 OID 0)
+-- TOC entry 3490 (class 0 OID 0)
 -- Dependencies: 217
 -- Name: TABLE corsi_laurea; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
@@ -1869,8 +1902,8 @@ GRANT SELECT ON TABLE progetto_esame.corsi_laurea TO studente;
 
 
 --
--- TOC entry 3486 (class 0 OID 0)
--- Dependencies: 217 3485
+-- TOC entry 3491 (class 0 OID 0)
+-- Dependencies: 217 3490
 -- Name: COLUMN corsi_laurea.nome; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1878,8 +1911,8 @@ GRANT UPDATE(nome) ON TABLE progetto_esame.corsi_laurea TO segreteria;
 
 
 --
--- TOC entry 3487 (class 0 OID 0)
--- Dependencies: 217 3485
+-- TOC entry 3492 (class 0 OID 0)
+-- Dependencies: 217 3490
 -- Name: COLUMN corsi_laurea.tipo; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1887,7 +1920,7 @@ GRANT UPDATE(tipo) ON TABLE progetto_esame.corsi_laurea TO segreteria;
 
 
 --
--- TOC entry 3488 (class 0 OID 0)
+-- TOC entry 3493 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: TABLE docenti; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
@@ -1897,8 +1930,8 @@ GRANT INSERT,DELETE,UPDATE ON TABLE progetto_esame.docenti TO segreteria;
 
 
 --
--- TOC entry 3489 (class 0 OID 0)
--- Dependencies: 216 3488
+-- TOC entry 3494 (class 0 OID 0)
+-- Dependencies: 216 3493
 -- Name: COLUMN docenti.email; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1907,8 +1940,8 @@ GRANT SELECT(email) ON TABLE progetto_esame.docenti TO segreteria;
 
 
 --
--- TOC entry 3490 (class 0 OID 0)
--- Dependencies: 216 3488
+-- TOC entry 3495 (class 0 OID 0)
+-- Dependencies: 216 3493
 -- Name: COLUMN docenti.nome; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1917,8 +1950,8 @@ GRANT SELECT(nome) ON TABLE progetto_esame.docenti TO segreteria;
 
 
 --
--- TOC entry 3491 (class 0 OID 0)
--- Dependencies: 216 3488
+-- TOC entry 3496 (class 0 OID 0)
+-- Dependencies: 216 3493
 -- Name: COLUMN docenti.cognome; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1927,8 +1960,8 @@ GRANT SELECT(cognome) ON TABLE progetto_esame.docenti TO segreteria;
 
 
 --
--- TOC entry 3492 (class 0 OID 0)
--- Dependencies: 216 3488
+-- TOC entry 3497 (class 0 OID 0)
+-- Dependencies: 216 3493
 -- Name: COLUMN docenti.password; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1936,7 +1969,7 @@ GRANT UPDATE(password) ON TABLE progetto_esame.docenti TO docente;
 
 
 --
--- TOC entry 3493 (class 0 OID 0)
+-- TOC entry 3498 (class 0 OID 0)
 -- Dependencies: 226
 -- Name: TABLE esami; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
@@ -1947,8 +1980,17 @@ GRANT SELECT ON TABLE progetto_esame.esami TO segreteria;
 
 
 --
--- TOC entry 3496 (class 0 OID 0)
--- Dependencies: 227
+-- TOC entry 3501 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: TABLE informazioni_complete_appelli; Type: ACL; Schema: progetto_esame; Owner: progetto
+--
+
+GRANT SELECT ON TABLE progetto_esame.informazioni_complete_appelli TO docente;
+
+
+--
+-- TOC entry 3502 (class 0 OID 0)
+-- Dependencies: 229
 -- Name: TABLE informazioni_complete_insegnamenti; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1956,7 +1998,7 @@ GRANT SELECT ON TABLE progetto_esame.informazioni_complete_insegnamenti TO segre
 
 
 --
--- TOC entry 3497 (class 0 OID 0)
+-- TOC entry 3503 (class 0 OID 0)
 -- Dependencies: 219
 -- Name: TABLE "propedeuticità"; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
@@ -1967,7 +2009,7 @@ GRANT SELECT,INSERT,DELETE ON TABLE progetto_esame."propedeuticità" TO segreter
 
 
 --
--- TOC entry 3498 (class 0 OID 0)
+-- TOC entry 3504 (class 0 OID 0)
 -- Dependencies: 215
 -- Name: TABLE segreteria; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
@@ -1976,8 +2018,8 @@ GRANT SELECT ON TABLE progetto_esame.segreteria TO segreteria;
 
 
 --
--- TOC entry 3499 (class 0 OID 0)
--- Dependencies: 215 3498
+-- TOC entry 3505 (class 0 OID 0)
+-- Dependencies: 215 3504
 -- Name: COLUMN segreteria.password; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1985,8 +2027,8 @@ GRANT UPDATE(password) ON TABLE progetto_esame.segreteria TO segreteria;
 
 
 --
--- TOC entry 3500 (class 0 OID 0)
--- Dependencies: 229
+-- TOC entry 3506 (class 0 OID 0)
+-- Dependencies: 228
 -- Name: TABLE storico_esami; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -1994,8 +2036,8 @@ GRANT SELECT,INSERT ON TABLE progetto_esame.storico_esami TO segreteria;
 
 
 --
--- TOC entry 3501 (class 0 OID 0)
--- Dependencies: 228
+-- TOC entry 3507 (class 0 OID 0)
+-- Dependencies: 227
 -- Name: TABLE storico_studenti; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -2003,7 +2045,7 @@ GRANT SELECT,INSERT,UPDATE ON TABLE progetto_esame.storico_studenti TO segreteri
 
 
 --
--- TOC entry 3502 (class 0 OID 0)
+-- TOC entry 3508 (class 0 OID 0)
 -- Dependencies: 223
 -- Name: TABLE studenti; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
@@ -2013,8 +2055,8 @@ GRANT INSERT,DELETE,UPDATE ON TABLE progetto_esame.studenti TO segreteria;
 
 
 --
--- TOC entry 3503 (class 0 OID 0)
--- Dependencies: 223 3502
+-- TOC entry 3509 (class 0 OID 0)
+-- Dependencies: 223 3508
 -- Name: COLUMN studenti.matricola; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -2023,8 +2065,8 @@ GRANT SELECT(matricola) ON TABLE progetto_esame.studenti TO segreteria;
 
 
 --
--- TOC entry 3504 (class 0 OID 0)
--- Dependencies: 223 3502
+-- TOC entry 3510 (class 0 OID 0)
+-- Dependencies: 223 3508
 -- Name: COLUMN studenti.email; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -2033,8 +2075,8 @@ GRANT SELECT(email) ON TABLE progetto_esame.studenti TO segreteria;
 
 
 --
--- TOC entry 3505 (class 0 OID 0)
--- Dependencies: 223 3502
+-- TOC entry 3511 (class 0 OID 0)
+-- Dependencies: 223 3508
 -- Name: COLUMN studenti.nome; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -2043,8 +2085,8 @@ GRANT SELECT(nome) ON TABLE progetto_esame.studenti TO segreteria;
 
 
 --
--- TOC entry 3506 (class 0 OID 0)
--- Dependencies: 223 3502
+-- TOC entry 3512 (class 0 OID 0)
+-- Dependencies: 223 3508
 -- Name: COLUMN studenti.cognome; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -2053,8 +2095,8 @@ GRANT SELECT(cognome) ON TABLE progetto_esame.studenti TO segreteria;
 
 
 --
--- TOC entry 3507 (class 0 OID 0)
--- Dependencies: 223 3502
+-- TOC entry 3513 (class 0 OID 0)
+-- Dependencies: 223 3508
 -- Name: COLUMN studenti.password; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -2062,8 +2104,8 @@ GRANT UPDATE(password) ON TABLE progetto_esame.studenti TO studente;
 
 
 --
--- TOC entry 3508 (class 0 OID 0)
--- Dependencies: 223 3502
+-- TOC entry 3514 (class 0 OID 0)
+-- Dependencies: 223 3508
 -- Name: COLUMN studenti.corso_laurea; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
 
@@ -2072,7 +2114,7 @@ GRANT SELECT(corso_laurea) ON TABLE progetto_esame.studenti TO segreteria;
 
 
 --
--- TOC entry 3510 (class 0 OID 0)
+-- TOC entry 3516 (class 0 OID 0)
 -- Dependencies: 222
 -- Name: SEQUENCE studenti_matricola_seq; Type: ACL; Schema: progetto_esame; Owner: progetto
 --
@@ -2080,7 +2122,7 @@ GRANT SELECT(corso_laurea) ON TABLE progetto_esame.studenti TO segreteria;
 GRANT SELECT,USAGE ON SEQUENCE progetto_esame.studenti_matricola_seq TO segreteria;
 
 
--- Completed on 2023-06-13 21:26:10 CEST
+-- Completed on 2023-06-14 12:10:21 CEST
 
 --
 -- PostgreSQL database dump complete
