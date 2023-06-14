@@ -35,14 +35,9 @@
 
   // ottenimento dell'appello e dell'insegnamento
   // ok quando esiste l'appello, esiste l'insegnamento ed è di proprietà dell'utente loggato
-  $query_string = "
-    select * 
-    from appelli a
-    inner join insegnamenti i on a.insegnamento = i.codice and a.corso_laurea = i.corso_laurea
-    where a.id = $1 and i.docente = $2
-  ";
+  $query_string = "select * from informazioni_complete_appelli where id = $1 and email_docente = $2";
   $query_params = array($_GET["id"], $authenticator->get_authenticated_user()["email"]);
-  $result = $database->execute_query("get_appello_join_insegnamento", $query_string, $query_params);
+  $result = $database->execute_query("get_appello", $query_string, $query_params);
   // se l'appello non esiste, l'utente viene reindirizzato alla index della dashboard
   if($result->row_count() == 0) {
     header("location: /dashboard/docenti/index.php");
@@ -108,7 +103,7 @@
               <nav class="breadcrumb" aria-label="breadcrumbs">
                 <ul>
                   <li><a href="/dashboard/docenti/index.php">Home</a></li>
-                  <li><a href="/dashboard/docenti/appelli.php?insegnamento=<?php echo $appello["codice"]; ?>&cdl=<?php echo $appello["corso_laurea"]; ?>">Appelli di "<?php echo $appello["nome"]; ?>"</a></li>
+                  <li><a href="/dashboard/docenti/appelli.php?insegnamento=<?php echo $appello["codice_insegnamento"]; ?>&cdl=<?php echo $appello["codice_corso_laurea"]; ?>">Appelli di "<?php echo $appello["nome_insegnamento"]; ?>"</a></li>
                   <li class="is-active">
                     <a href="#" aria-current="page">Appello in data <?php echo date_format(date_create($appello["data"]), "d/m/Y"); ?></a>
                   </li>

@@ -39,14 +39,9 @@
   $database->open_conn();
 
   // controllo se l'appello è di proprietà del docente loggato
-  $query_string = "
-    select *
-    from appelli a
-    inner join insegnamenti i on a.corso_laurea = i.corso_laurea and a.insegnamento = i.codice
-    where i.docente = $1
-  ";
-  $query_params = array($authenticator->get_authenticated_user()["email"]);
-  $result = $database->execute_query("get_insegnamento", $query_string, $query_params);
+  $query_string = "select * from informazioni_complete_appelli where id = $1 and email_docente = $2";
+  $query_params = array($_POST["appello"], $authenticator->get_authenticated_user()["email"]);
+  $result = $database->execute_query("get_appello", $query_string, $query_params);
   if($result->row_count() == 0) {
     http_response_code(401);
     echo json_encode(array("message" => "Utente non autorizzato."));
